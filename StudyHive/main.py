@@ -128,53 +128,88 @@ def support():
     )
 
     conn.commit()
+    cursor.close()
     conn.close()
 
     # ---------------- SEND EMAILS (SENDGRID) ----------------
     try:
         sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
 
-        # Email to admin
+        # =========================
+        # EMAIL 1: ADMIN REPORT
+        # =========================
         admin_email = Mail(
             from_email=os.environ.get("MAIL_FROM"),
             to_emails=os.environ.get("MAIL_TO"),
             subject="New StudyHive Support Report",
+
+            plain_text_content=f"""
+            New Support Report
+
+            Name: {name}
+            Email: {user_email}
+
+            Message:
+            {message}
+            """,
+
             html_content=f"""
-            <h2>New Support Report</h2>
-            <p><strong>Name:</strong> {name}</p>
-            <p><strong>Email:</strong> {user_email}</p>
-            <p><strong>Message:</strong></p>
-            <p>{message}</p>
+            <html>
+                <body style="font-family: Arial, sans-serif;">
+                    <h2>New Support Report</h2>
+                    <p><strong>Name:</strong> {name}</p>
+                    <p><strong>User Email:</strong> {user_email}</p>
+                    <p><strong>Message:</strong></p>
+                    <p>{message}</p>
+                </body>
+            </html>
             """
         )
 
-        # Confirmation email to user
-        user_email_msg = Mail(
+        # =========================
+        # EMAIL 2: USER CONFIRMATION (YOUR ORIGINAL MESSAGE)
+        # =========================
+        confirmation_email = Mail(
             from_email=os.environ.get("MAIL_FROM"),
             to_emails=user_email,
             subject="We’ve received your report – StudyHive",
+
+            plain_text_content=f"""
+            Hi {name},
+
+            We’ve received your support request and will get back to you as soon as possible.
+
+            Your message:
+            {message}
+
+            – StudyHive Support Team
+            """,
+
             html_content=f"""
-            <p>Hi {name},</p>
-            <p>We’ve received your support request and will get back to you shortly.</p>
-            <p><strong>Your message:</strong></p>
-            <p>{message}</p>
-            <br>
-            <p>– StudyHive Support Team</p>
+            <html>
+                <body style="font-family: Arial, sans-serif;">
+                    <h2>Thank you for contacting StudyHive</h2>
+                    <p>Hi {name},</p>
+                    <p>We’ve received your support request and will get back to you as soon as possible.</p>
+                    <p><strong>Your message:</strong></p>
+                    <p>{message}</p>
+                    <br>
+                    <p>– StudyHive Support Team</p>
+                </body>
+            </html>
             """
         )
 
         sg.send(admin_email)
-        sg.send(user_email_msg)
+        sg.send(confirmation_email)
 
         print("SENDGRID EMAILS SENT SUCCESSFULLY")
 
     except Exception as e:
-        # Email failure must NOT break the app
+        # Email issues should NOT break the app
         print("SENDGRID EMAIL ERROR (ignored):", e)
 
-    # ---------------- FINAL RESPONSE ----------------
     return jsonify(success=True)
-
 
 @app.route("/admin/support")
 def admin_support():
