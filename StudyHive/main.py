@@ -13,7 +13,6 @@ app = Flask(__name__)
 app.secret_key = "studyhive-secret-key"  # required for sessions
 CORS(app)  # allow frontend requests
 
-init_db()
 
 @app.route("/")
 def index():
@@ -267,4 +266,5 @@ def resolve_report(report_id):
     return redirect("/admin/support")
 
 if __name__ == "__main__":
+    init_db()
     app.run(debug=True)
