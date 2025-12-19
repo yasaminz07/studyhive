@@ -1,18 +1,23 @@
 from flask import Flask, render_template, request, jsonify, redirect, session
 from flask_cors import CORS
 from dotenv import load_dotenv
-from email.message import EmailMessage
-import smtplib
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 import os
 from database import get_db_connection, init_db
 
-load_dotenv()
+# Load .env ONLY locally
+if os.getenv("FLASK_ENV") != "production":
+    load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "studyhive-secret-key")
 CORS(app)  # allow frontend requests
 
-init_db()
+# Safe DB init
+@app.before_first_request
+def setup_database():
+    init_db()
 
 @app.route("/")
 def index():
@@ -105,89 +110,70 @@ def support():
     name = data.get("name")
     message = data.get("message")
 
+    # ---------------- VALIDATION ----------------
     if not user_email or not name or not message:
         return jsonify(success=False), 400
-    
-    # -------- SAVE TO DATABASE --------
+
+    # ---------------- SAVE TO DATABASE ----------------
     conn = get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute(
-        "INSERT INTO support_reports (name, email, message, resolved) VALUES (%s, %s, %s, %s)",
+        """
+        INSERT INTO support_reports (name, email, message, resolved)
+        VALUES (%s, %s, %s, %s)
+        """,
         (name, user_email, message, False)
     )
 
     conn.commit()
     conn.close()
 
+    # ---------------- SEND EMAILS (SENDGRID) ----------------
+    try:
+        sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
 
-    # =========================
-    # EMAIL 1: SUPPORT REPORT
-    # =========================
-    support_email = EmailMessage()
-    support_email["Subject"] = "New StudyHive Support Report"
-    support_email["From"] = os.getenv("MAIL_USERNAME")
-    support_email["To"] = os.getenv("MAIL_TO")
-    support_email["CC"] = user_email
-    support_email["Reply-To"] = user_email
-
-    support_email.set_content("This email requires HTML support.")
-    support_email.add_alternative(f"""
-    <html>
-        <body style="font-family: Arial, sans-serif;">
+        # Email to admin
+        admin_email = Mail(
+            from_email=os.environ.get("MAIL_FROM"),
+            to_emails=os.environ.get("MAIL_TO"),
+            subject="New StudyHive Support Report",
+            html_content=f"""
             <h2>New Support Report</h2>
             <p><strong>Name:</strong> {name}</p>
-            <p><strong>User Email:</strong> {user_email}</p>
+            <p><strong>Email:</strong> {user_email}</p>
             <p><strong>Message:</strong></p>
             <p>{message}</p>
-        </body>
-    </html>
-    """, subtype="html")
+            """
+        )
 
-    # =========================
-    # EMAIL 2: AUTO-CONFIRMATION
-    # =========================
-    confirmation_email = EmailMessage()
-    confirmation_email["Subject"] = "We’ve received your report – StudyHive"
-    confirmation_email["From"] = os.getenv("MAIL_USERNAME")
-    confirmation_email["To"] = user_email
-
-    confirmation_email.set_content("This email requires HTML support.")
-    confirmation_email.add_alternative(f"""
-    <html>
-        <body style="font-family: Arial, sans-serif;">
-            <h2>Thank you for contacting StudyHive</h2>
+        # Confirmation email to user
+        user_email_msg = Mail(
+            from_email=os.environ.get("MAIL_FROM"),
+            to_emails=user_email,
+            subject="We’ve received your report – StudyHive",
+            html_content=f"""
             <p>Hi {name},</p>
-            <p>We’ve received your support request and will get back to you as soon as possible.</p>
+            <p>We’ve received your support request and will get back to you shortly.</p>
             <p><strong>Your message:</strong></p>
             <p>{message}</p>
             <br>
             <p>– StudyHive Support Team</p>
-        </body>
-    </html>
-    """, subtype="html")
+            """
+        )
 
-    try:
-        with smtplib.SMTP(
-            os.environ.get("MAIL_SERVER"),
-            int(os.environ.get("MAIL_PORT", 587)),
-            timeout=10 
-        ) as server:
-            server.starttls()
-            server.login(
-                os.environ.get("MAIL_USERNAME"),
-                os.environ.get("MAIL_PASSWORD")
-            )
+        sg.send(admin_email)
+        sg.send(user_email_msg)
 
-            server.send_message(support_email)
-            server.send_message(confirmation_email)
-
-        print("EMAILS SENT SUCCESSFULLY")
+        print("SENDGRID EMAILS SENT SUCCESSFULLY")
 
     except Exception as e:
-        print("EMAIL ERROR (ignored):", e)
+        # Email failure must NOT break the app
+        print("SENDGRID EMAIL ERROR (ignored):", e)
 
+    # ---------------- FINAL RESPONSE ----------------
     return jsonify(success=True)
+
 
 @app.route("/admin/support")
 def admin_support():
@@ -266,4 +252,5 @@ def resolve_report(report_id):
     return redirect("/admin/support")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=os.getenv("FLASK_ENV") != "production")
+

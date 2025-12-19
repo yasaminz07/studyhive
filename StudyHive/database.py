@@ -2,16 +2,22 @@ import psycopg2
 import os
 
 def get_db_connection():
+    database_url = os.getenv("DATABASE_URL")
+
+    if not database_url:
+        raise RuntimeError("DATABASE_URL is not set")
+
     return psycopg2.connect(
-        os.getenv("DATABASE_URL"),
+        database_url,
         sslmode="require"
     )
 
+
 def init_db():
     conn = get_db_connection()
-    cursor = conn.cursor()
+    cur = conn.cursor()
 
-    cursor.execute("""
+    cur.execute("""
         CREATE TABLE IF NOT EXISTS support_reports (
             id SERIAL PRIMARY KEY,
             name TEXT NOT NULL,
@@ -23,4 +29,5 @@ def init_db():
     """)
 
     conn.commit()
+    cur.close()
     conn.close()
