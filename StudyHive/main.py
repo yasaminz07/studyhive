@@ -220,10 +220,10 @@ def admin_dashboard():
     cursor.execute("SELECT COUNT(*) FROM support_reports")
     total = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM support_reports WHERE resolved = 0")
+    cursor.execute("SELECT COUNT(*) FROM support_reports WHERE resolved = FALSE")
     unresolved = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM support_reports WHERE resolved = 1")
+    cursor.execute("SELECT COUNT(*) FROM support_reports WHERE resolved = TRUE")
     resolved = cursor.fetchone()[0]
 
     # Latest 5 reports
