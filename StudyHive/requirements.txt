@@ -1,5 +1,6 @@
 Flask
-Flask-Cors
+flask-cors
 python-dotenv
-gunicorn
 psycopg2-binary
+sendgrid
+gunicorn
