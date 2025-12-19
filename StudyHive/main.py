@@ -14,10 +14,11 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "studyhive-secret-key")
 CORS(app)  # allow frontend requests
 
-# Safe DB init
-@app.before_first_request
-def setup_database():
-    init_db()
+def safe_init_db():
+    try:
+        init_db()
+    except Exception as e:
+        print("DB init skipped:", e)
 
 @app.route("/")
 def index():
@@ -252,5 +253,5 @@ def resolve_report(report_id):
     return redirect("/admin/support")
 
 if __name__ == "__main__":
+    safe_init_db()
     app.run(debug=os.getenv("FLASK_ENV") != "production")
-
