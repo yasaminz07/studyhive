@@ -113,8 +113,11 @@ def support():
     cursor = conn.cursor()
 
     cursor.execute(
-        "INSERT INTO support_reports (name, email, message, resolved) VALUES (?, ?, ?, 0)",
-        (name, user_email, message)
+        """
+        INSERT INTO support_reports (name, email, message, resolved)
+        VALUES (%s, %s, %s, %s)
+        """,
+        (name, user_email, message, False)
     )
 
     conn.commit()
@@ -268,3 +271,4 @@ def resolve_report(report_id):
 if __name__ == "__main__":
     init_db()
     app.run(debug=True)
+
