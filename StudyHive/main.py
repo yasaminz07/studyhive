@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect, session, url_for
+from flask import Flask, render_template, request, jsonify, redirect, session
 from flask_cors import CORS
 from dotenv import load_dotenv
 from email.message import EmailMessage
@@ -6,13 +6,13 @@ import smtplib
 import os
 from database import get_db_connection, init_db
 
-
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = "studyhive-secret-key"  # required for sessions
+app.secret_key = os.getenv("SECRET_KEY", "studyhive-secret-key")
 CORS(app)  # allow frontend requests
 
+init_db()
 
 @app.route("/")
 def index():
@@ -113,10 +113,7 @@ def support():
     cursor = conn.cursor()
 
     cursor.execute(
-        """
-        INSERT INTO support_reports (name, email, message, resolved)
-        VALUES (%s, %s, %s, %s)
-        """,
+        "INSERT INTO support_reports (name, email, message, resolved) VALUES (%s, %s, %s, %s)",
         (name, user_email, message, False)
     )
 
@@ -172,13 +169,14 @@ def support():
 
     try:
         with smtplib.SMTP(
-            os.environ["MAIL_SERVER"],
-            int(os.environ["MAIL_PORT"])
+            os.environ.get("MAIL_SERVER"),
+            int(os.environ.get("MAIL_PORT", 587)),
+            timeout=10 
         ) as server:
             server.starttls()
             server.login(
-                os.environ["MAIL_USERNAME"],
-                os.environ["MAIL_PASSWORD"]
+                os.environ.get("MAIL_USERNAME"),
+                os.environ.get("MAIL_PASSWORD")
             )
 
             server.send_message(support_email)
@@ -187,8 +185,7 @@ def support():
         print("EMAILS SENT SUCCESSFULLY")
 
     except Exception as e:
-        print("EMAIL ERROR:", e)
-        return jsonify(success=False), 500
+        print("EMAIL ERROR (ignored):", e)
 
     return jsonify(success=True)
 
@@ -259,8 +256,8 @@ def resolve_report(report_id):
     cursor = conn.cursor()
 
     cursor.execute(
-        "UPDATE support_reports SET resolved = 1 WHERE id = ?",
-        (report_id,)
+        "UPDATE support_reports SET resolved = %s WHERE id = %s",
+        (True, report_id)
     )
 
     conn.commit()
@@ -269,6 +266,4 @@ def resolve_report(report_id):
     return redirect("/admin/support")
 
 if __name__ == "__main__":
-    init_db()
     app.run(debug=True)
-
