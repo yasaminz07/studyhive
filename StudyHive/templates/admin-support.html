@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin – Support Reports</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <a href="{{ url_for('admin_dashboard') }}" class="admin-dashboard-btn">
+                ← Back to Dashboard
+            </a>
+
+            <a href="{{ url_for('admin_logout') }}" class="admin-logout-btn">
+                Logout
+            </a>
+        </div>
+
+        <h1>Support Reports</h1>
+
+        {% if reports|length == 0 %}
+            <p>No reports yet.</p>
+        {% endif %}
+
+        {% for report in reports %}
+            <div class="report-card">
+                <p><strong>Name:</strong> {{ report[1] }}</p>
+                <p><strong>Email:</strong> {{ report[2] }}</p>
+                <p><strong>Message:</strong> {{ report[3] }}</p>
+                <p><strong>Date:</strong> {{ report[5] }}</p>
+
+                {% if report[4] == 1 %}
+                    <span class="status resolved">Resolved</span>
+                {% else %}
+                    <form method="POST" action="/admin/support/resolve/{{ report[0] }}">
+                        <button type="submit">Mark as Resolved</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

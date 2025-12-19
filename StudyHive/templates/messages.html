@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyHive – Messages</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body class="messages-body">
+    <header class="main-header">
+        <div class="logo-area">
+            <div class="logo-icon"></div>
+            <span class="logo-text">Study<span>Hive</span></span>
+        </div>
+
+        <nav class="main-nav">
+            <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
+            <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
+            <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
+            <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
+
+        </nav>
+
+        <div class="header-right">
+            <div class="search-wrapper">
+                <input type="text" placeholder="Search" />
+                <button class="icon-btn">🔍</button>
+            </div>
+            <div class="profile-area">
+            <span class="profile-name">Raashid Noor</span>
+            <img src="assets/profile.png" class="profile-icon" alt="Profile">
+
+            <!-- DROPDOWN MENU -->
+            <div class="profile-menu" id="profileMenu">
+                <a href="profile.html">View Profile</a>
+                <a href="#" id="toggleTheme">Toggle Light</a>
+                <a href="support.html">Support</a>
+                <a href="#" onclick="showSignOut()">Sign Out</a>
+            </div>
+
+            <!-- SIGN OUT MODAL SHOULD BE OUTSIDE -->
+            <div class="modal-overlay" id="signOutModal">
+                <div class="modal-box">
+                    <h2>Sign Out</h2>
+                    <p>Are you sure you wish to sign out?<br>
+                    You will need to login again if you wish to proceed.</p>
+                    <button href="index.html" class="signout-btn" onclick="signOut()">Sign Out</button>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </header>
+
+<div class="messages-container">
+
+    <!-- FRIENDS COLUMN -->
+    <aside class="friends-column">
+        <img src="assets/avatar1.png" class="friend-avatar" onclick="selectFriend(1)" title="Yung Limo">
+        <img src="assets/avatar2.png" class="friend-avatar" onclick="selectFriend(3)" title="Raashid Noor">
+        <img src="assets/avatar3.png" class="friend-avatar" onclick="selectFriend(4)" title="Juzer Pakawala">
+    </aside>
+
+    <!-- CONVERSATION LIST -->
+    <aside class="chat-list" id="chatList">
+        <div class="chat-list-header">Messages</div>
+            <input type="text" class="chat-search" placeholder="Search conversations…">
+
+        <div class="chat-item active">
+            <span class="chat-name">Yung Limo</span>
+            <span class="chat-preview">Send me the assignment!</span>
+            <span class="chat-time">2m</span>
+        </div>
+        <div class="chat-item">
+            <span class="chat-name">Juzer</span>
+            <span class="chat-preview">Let's meet tomorrow.</span>
+            <span class="chat-time">1h</span>
+        </div>
+        <div class="chat-item">
+            <span class="chat-name">Raashid Noor</span>
+            <span class="chat-preview">Thank you bro </span>
+            <span class="chat-time">3h</span>
+        </div>
+    </aside>
+
+    <!-- CHAT WINDOW -->
+    <section class="chat-window">
+
+        <div class="chat-topbar" id="chatName">Yung Limo</div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg-row received"><div class="msg">Hey can you help me?</div></div>
+            <div class="msg-row sent"><div class="msg">Sure, what do you need?</div></div>
+        </div>
+
+        <div class="chat-input-bar">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type a message…">
+            <button class="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+
+    </section>
+
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

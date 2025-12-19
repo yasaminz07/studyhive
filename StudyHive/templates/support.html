@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyHive – Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="page-wrap">
+    <header class="main-header">
+        <div class="logo-area">
+            <div class="logo-icon"></div>
+            <span class="logo-text">Study<span>Hive</span></span>
+        </div>
+
+        <nav class="main-nav">
+            <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
+            <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
+            <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
+            <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
+
+        </nav>
+
+        <div class="header-right">
+            <div class="search-wrapper">
+                <input type="text" placeholder="Search" />
+                <button class="icon-btn">🔍</button>
+            </div>
+            <div class="profile-area">
+            <span class="profile-name">Raashid Noor</span>
+            <img src="assets/profile.png" class="profile-icon" alt="Profile">
+
+            <!-- DROPDOWN MENU -->
+            <div class="profile-menu" id="profileMenu">
+                <a href="profile.html">View Profile</a>
+                <a href="#" id="toggleTheme">Toggle Light</a>
+                <a href="{{ url_for('support_page') }}">Support</a>
+                <a href="#" onclick="showSignOut()">Sign Out</a>
+            </div>
+
+            <!-- SIGN OUT MODAL SHOULD BE OUTSIDE -->
+            <div class="modal-overlay" id="signOutModal">
+                <div class="modal-box">
+                    <h2>Sign Out</h2>
+                    <p>Are you sure you wish to sign out?<br>
+                    You will need to login again if you wish to proceed.</p>
+                    <button href="index.html" class="signout-btn" onclick="signOut()">Sign Out</button>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </header>
+
+    <main class="main-content support-page">
+
+        <div class="support-box">
+        <h2 class="support-title">Support</h2>
+
+        <form id="supportForm">
+            <input type="email" id="email" class="support-input" placeholder="Enter email address" required>
+            <input type="text" id="name" class="support-input" placeholder="Enter Name" required>
+            <textarea id="message" class="support-textarea" placeholder="Enter your message" required></textarea>
+
+            <button type="submit" class="support-submit" id="submitBtn">
+                Submit
+            </button>
+
+            <div id="loadingSpinner" class="spinner hidden"></div>
+        </form>
+
+        <div id="toast" class="toast hidden">
+            ✔ Your report has been sent successfully
+        </div>
+    </div>
+
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

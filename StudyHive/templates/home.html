@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyHive – Home</title>
+    <link rel="stylesheet" href="static/css/style.css" />
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo-area">
+            <div class="logo-icon"></div>
+            <span class="logo-text">Study<span>Hive</span></span>
+        </div>
+
+        <nav class="main-nav">
+            <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
+            <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
+            <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
+            <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
+
+        </nav>
+
+        <div class="header-right">
+
+            <!-- TOP ROW (Post + Name + Icon) -->
+            <div class="header-right-top">
+                <a href="post.html" class="post-btn">Post</a>
+
+                <span class="profile-name">Raashid Noor</span>
+                <img src="assets/profile.png" class="profile-icon" alt="Profile">
+            </div>
+
+            <!-- BOTTOM ROW (Search Bar) -->
+            <div class="header-right-bottom">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search">
+                    <button class="search-icon">
+                    <img src="assets/icons/bookmark.png" class="search-img" alt="">
+                </button>
+                </div>
+            </div>
+
+            <!-- DROPDOWN MENU -->
+            <div class="profile-menu" id="profileMenu">
+                <a href="profile.html">View Profile</a>
+                <a href="#" id="toggleTheme">Toggle Light</a>
+                <a href="support.html">Support</a>
+                <a href="#" onclick="showSignOut()">Sign Out</a>
+            </div>
+
+            <!-- SIGN OUT MODAL SHOULD BE OUTSIDE -->
+            <div class="modal-overlay" id="signOutModal">
+                <div class="modal-box">
+                    <h2>Sign Out</h2>
+                    <p>Are you sure you wish to sign out?<br>
+                    You will need to login again if you wish to proceed.</p>
+                    <button href="index.html" class="signout-btn" onclick="signOut()">Sign Out</button>
+                </div>
+            </div>
+
+        </div>
+        
+        
+    </header>
+<div class="page-wrap"></div>
+    <main class="main-content">
+        <h2 class="section-title">TOP POSTS</h2>
+        <div class="top-posts-strip">
+            <div class="top-post-card"></div>
+            <div class="top-post-card"></div>
+            <div class="top-post-card"></div>
+            <div class="top-post-card"></div>
+            <div class="top-post-card"></div>
+        </div>
+
+        <!--<div class="posts-header">
+            <h2 class="section-title">POSTS</h2>
+            <select class="sort-select">
+                <option>Best</option>
+                <option>Newest</option>
+                <option>Oldest</option>
+            </select>
+        </div>-->
+
+        <!-- Post 1 -->
+        <article class="post-card">
+            <header class="post-header">
+                <div class="post-author">
+                    <div class="avatar-circle red"><a href="profile-other.html">YL</a></div>
+                    <div>
+                        <div class="author-row">
+                            <span class="author-name">Yung Limo</span>
+                            <span class="badge badge-red">Student</span>
+                        </div>
+                        <span class="post-meta">2 hours ago</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="post-body">
+                <h3>Assistance on driveway angle swap</h3>
+                <p class="post-placeholder">
+                    <div class="post-image">
+                        <img src="assets/photo/myimage1.png" alt="post image">
+                    </div>
+                </p>
+                <!--<button class="primary-btn small">POST</button>-->
+            </div>
+
+            <footer class="post-footer">
+                <button class="post-stat"> Likes</button>
+                <button class="post-stat"> Comments</button>
+                <button class="post-stat"> Saved</button>
+                <button class="post-stat"> Share</button>
+                <button class="post-stat info">ⓘ</button>
+            </footer>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="post-card">
+            <header class="post-header">
+                <div class="post-author">
+                    <div class="avatar-circle orange">RN</div>
+                    <div>
+                        <div class="author-row">
+                            <span class="author-name">Raashid Noor</span>
+                            <span class="badge badge-red">Student</span>
+                        </div>
+                        <span class="post-meta">1 hour ago</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="post-body">
+                <h3>HELP ME</h3>
+                <p class="post-placeholder"></p>
+            </div>
+
+            <footer class="post-footer">
+                <button class="post-stat"> Likes</button>
+                <button class="post-stat" onclick="event.stopPropagation(); openComment(1)"> Comments</button>
+                <button class="post-stat"> Saved</button>
+                <button class="post-stat" onclick="showShareModal()">Share</button>
+                <button onclick="showReportModal()">Report</button>
+            </footer>
+            <!-- COMMENT BOX GOES HERE -->
+                <div class="comment-box" id="commentBox1">
+
+                    <div class="comment-header">
+                        <span class="comment-title">Comment</span>
+                        <button class="close-comment" onclick="closeComment(1)">✕</button>
+                    </div>
+
+                    <div class="comment-input-row">
+                        <input type="text" class="comment-input" id="commentInput1" placeholder="Enter the Comment…" />
+                        <button class="send-comment" onclick="sendComment(1)">Send</button>
+                    </div>
+
+                </div>
+
+        </article>
+        <!-- REPORT MODAL-->
+        <div class="modal-overlay" id="reportModal">
+            <div class="modal-box report-box">
+                    <button class="close-modal" onclick="hideReportModal()">✕</button>
+                <h2>REPORT CONTENT</h2>
+                <p class="report-subtitle">Reason for report</p>
+
+                <div class="report-options">
+                <label><input type="radio" name="reportReason" value="Scam/Spam"> Scam/Spam</label>
+                <label><input type="radio" name="reportReason" value="Bullying/Harassment"> Bullying/Harassment</label>
+                <label><input type="radio" name="reportReason" value="Malicious Content"> Malicious Content</label>
+                <label><input type="radio" name="reportReason" value="Other"> Other</label>
+                </div>
+
+                <button class="report-btn" onclick="submitReport()">REPORT</button>
+
+                <p class="report-info">
+                After human verification, a follow up will be sent<br>
+                to you on a final decision
+                </p>
+            </div>
+        </div>
+
+        <!-- SHARE MODAL -->
+        <div class="modal-overlay" id="shareModal">
+            <div class="modal-box share-box">
+                    <button class="close-modal" onclick="hideShareModal()">✕</button>
+
+                <div class="share-platforms">
+
+                    <div class="share-item" onclick="shareToInstagram()">
+                        <img src="assets/ig.png">
+                        <span>Instagram</span>
+                    </div>
+
+                    <div class="share-item" onclick="shareToX()">
+                        <img src="assets/x.png">
+                        <span>X</span>
+                    </div>
+
+                    <div class="share-item" onclick="shareToSnapchat()">
+                        <img src="assets/snap.png">
+                        <span>Snapchat</span>
+                    </div>
+
+                    <div class="share-item" onclick="copyPostLink()">
+                        <img src="assets/link.png">
+                        <span>Copy Link</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+</div>
+<footer>
+    
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

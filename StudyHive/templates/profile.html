@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyHive – Profile</title>
+    <link rel="stylesheet" href="static/css/style.css" />
+</head>
+<body>
+<div class="page-wrap">
+    <header class="main-header">
+        <div class="logo-area">
+            <div class="logo-icon"></div>
+            <span class="logo-text">Study<span>Hive</span></span>
+        </div>
+
+        <nav class="main-nav">
+            <a href="home.html" class="nav-pill active">Home</a>
+            <a href="explore.html" class="nav-pill">Explore</a>
+            <a href="about.html" class="nav-pill">About Us</a>
+            <a href="messages.html" class="nav-pill">Messages</a>
+
+        </nav>
+
+        <div class="header-right">
+            <div class="search-wrapper">
+                <input type="text" placeholder="Search" />
+                <button class="icon-btn">🔍</button>
+            </div>
+            <div class="profile-area">
+            <span class="profile-name">Raashid Noor</span>
+            <img src="assets/profile.png" class="profile-icon" alt="Profile">
+
+            <!-- DROPDOWN MENU -->
+            <div class="profile-menu" id="profileMenu">
+                <a href="profile.html">View Profile</a>
+                <a href="#" id="toggleTheme">Toggle Light</a>
+                <a href="support.html">Support</a>
+                <a href="#" onclick="showSignOut()">Sign Out</a>
+            </div>
+
+            <!-- SIGN OUT MODAL SHOULD BE OUTSIDE -->
+            <div class="modal-overlay" id="signOutModal">
+                <div class="modal-box">
+                    <h2>Sign Out</h2>
+                    <p>Are you sure you wish to sign out?<br>
+                    You will need to login again if you wish to proceed.</p>
+                    <button href="index.html" class="signout-btn" onclick="signOut()">Sign Out</button>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="profile-header">
+            <div class="profile-main-info">
+                <div class="avatar-large red">RN</div>
+                <div>
+                    <div class="profile-title-row">
+                        <h2>Raashid Noor</h2>
+                        <span class="badge badge-red">Student</span>
+                    </div>
+                    <p class="profile-subtitle">Computer Science @ BCU</p>
+                    <button class="secondary-btn">Edit Profile</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-body-layout">
+            <div class="section-row">
+                <div class="section-heading">
+                    <h3>Subjects</h3>
+                    <span>&gt;</span>
+                </div>
+            </div>
+
+            <div class="section-row">
+                <div class="section-heading">
+                    <h3>Friends</h3>
+                    <button class="link-btn">View all</button>
+                </div>
+                <div class="friends-strip">
+                    <div class="avatar-circle">U</div>
+                    <div class="avatar-circle">U</div>
+                    <div class="avatar-circle">U</div>
+                    <div class="avatar-circle">U</div>
+                    <div class="avatar-circle">U</div>
+                </div>
+            </div>
+
+            <div class="section-row">
+                <div class="section-heading">
+                    <h3>Posts</h3>
+                </div>
+                <div class="post-grid">
+                    <article class="post-card">
+                        <header class="post-header">
+                            <div class="post-author">
+                                <div class="avatar-circle red">RN</div>
+                                <div>
+                                    <span class="author-name"></span>
+                                    <span class="post-meta">1 hour ago</span>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="post-body">
+                            <h3>HELP ME</h3>
+                            <p class="post-placeholder"></p>
+                        </div>
+                        <footer class="post-footer">
+                            <button class="post-stat">♡ 23.6k Likes</button>
+                            <button class="post-stat">💬 2350 Comments</button>
+                            <button class="post-stat">🔖 21.8k Saved</button>
+                            <button class="post-stat">⤴ Share</button>
+                            <button class="post-stat info">ⓘ</button>
+                        </footer>
+                    </article>
+
+                    <article class="post-card">
+                        <header class="post-header">
+                            <div class="post-author">
+                                <div class="avatar-circle red">RN</div>
+                                <div>
+                                    <span class="author-name"></span>
+                                    <span class="post-meta">1 hour ago</span>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="post-body">
+                            <h3>HELP ME</h3>
+                            <p class="post-placeholder"></p>
+                        </div>
+                        <footer class="post-footer">
+                            <button class="post-stat">♡ 23.6k Likes</button>
+                            <button class="post-stat">💬 2350 Comments</button>
+                            <button class="post-stat">🔖 21.8k Saved</button>
+                            <button class="post-stat">⤴ Share</button>
+                            <button class="post-stat info">ⓘ</button>
+                        </footer>
+                    </article>
+
+                    <article class="post-card">
+                        <header class="post-header">
+                            <div class="post-author">
+                                <div class="avatar-circle red">RN</div>
+                                <div>
+                                    <span class="author-name"></span>
+                                    <span class="post-meta">1 hour ago</span>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="post-body">
+                            <h3>HELP ME</h3>
+                            <p class="post-placeholder"></p>
+                        </div>
+                        <footer class="post-footer">
+                            <button class="post-stat">♡ 23.6k Likes</button>
+                            <button class="post-stat">💬 2350 Comments</button>
+                            <button class="post-stat">🔖 21.8k Saved</button>
+                            <button class="post-stat">⤴ Share</button>
+                            <button class="post-stat info">ⓘ</button>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

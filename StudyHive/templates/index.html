@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>StudyHive – Welcome</title>
+    <link rel="stylesheet" href="static/css/style.css" />
+</head>
+<body>
+<div class="page-wrap">
+    <header class="main-header">
+        <div class="logo-area">
+            <span class="logo-text">Study<span>Hive</span></span>
+        </div>
+
+        <nav class="main-nav">
+            <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
+            <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
+            <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
+            <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
+        </nav>
+
+        <div class="header-right">
+            <a href="#" class="login-btn" id="openLogin">LOGIN</a>
+            <a href="#" class="signup-btn" id="openSignup">SIGN UP</a>
+        </div>
+        
+    </header>
+
+    
+
+    <main class="main-content">
+        <section class="welcome-layout">
+            <div>
+                <div class="speech-card">
+                    <p>
+                        “My son has been using this website daily for his GCSEs and says it’s
+                        more useful for learning than some teachers in school!”
+                    </p>
+                </div>
+
+                <div class="speech-card bottom">
+                    <p>
+                        Worried about money? Don’t worry! StudyHive is completely free for you 😊
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <div class="hero-card">
+                    <p class="hero-placeholder">Revising word placeholder</p>
+                </div>
+                <a href="home.html" class="primary-btn">Get Started</a>
+            </div>
+
+            <div>
+                <div class="honeycomb">
+                    <div class="hex teal"></div>
+                    <div class="hex blue"></div>
+                    <div class="hex white"></div>
+                    <div class="hex yellow"></div>
+                    <div class="hex blue dark"></div>
+                </div>
+
+                <div class="speech-card bottom">
+                    <p>
+                        Studying with friends can boost your learning by up to 300%!
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- LOGIN MODAL -->
+        <div id="loginModal" class="modal">
+            <div class="modal-content">
+                <button class="close-modal" id="closeLogin">×</button>
+
+                <h2>Log In</h2>
+                <p class="terms">
+                    By continuing, you agree to our 
+                    <a href="#">User Agreement</a> and our 
+                    <a href="#">Privacy Policy</a>.
+                </p>
+
+                <input type="email" placeholder="Enter username" class="input-box">
+                <input type="password" placeholder="Enter Password" class="input-box">
+
+                <a href="#" class="forgot">Forgot password?</a>
+                <a href="#" class="modal-link" id="switchToSignup">Don’t have an account? Sign up</a>
+
+                <button class="login-btn-modal"> <a href="home.html">Log In</a></button>
+            </div>
+        </div>
+
+        <!-- SIGNUP MODAL -->
+        <div id="signupModal" class="modal">
+            <div class="modal-content">
+                <button class="close-modal" id="closeSignup">×</button>
+
+                <h2>Sign Up</h2>
+                <p class="terms">
+                    Create an account to join StudyHive and access all features.
+                </p>
+
+                <input type="text" placeholder="Full Name" class="input-box">
+                <input type="email" placeholder="Email Address" class="input-box">
+                <input type="password" placeholder="Create Password" class="input-box">
+                <input type="password" placeholder="Confirm Password" class="input-box">
+
+                <a href="#" class="modal-link" id="switchToLogin">Already have an account? Log in</a>
+
+                <button class="login-btn-modal">Create Account</button>
+            </div>
+        </div>
+
+
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
