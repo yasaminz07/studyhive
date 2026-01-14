@@ -1880,77 +1880,6 @@ body.messages-page .chat-view{
   border-right: none;            /* don't outline whole page */
 }
 
-
-/* ===== ABOUT / SUPPORT ===== */
-
-.todo-text {
-    text-align: center;
-    margin-top: 140px;
-    font-size: 18px;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-/* SUPPORT PAGE --------------------------------------------------- */
-
-.support-page {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 60px;
-}
-
-.support-box {
-    width: 420px;
-    padding: 40px;
-    border-radius: 18px;
-    background: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.55);
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    text-align: center;
-}
-
-.support-title {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.support-input,
-.support-textarea {
-    width: 100%;
-    padding: 14px;
-    border-radius: 10px;
-    border: none;
-    background: #121212;
-    color: #fff;
-    font-size: 15px;
-}
-
-.support-textarea {
-    height: 120px;
-    resize: none;
-}
-
-.support-submit {
-    width: 100%;
-    padding: 12px;
-    border-radius: 26px;
-    background: white;
-    color: black;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: background .2s, transform .2s;
-}
-
-.support-submit:hover {
-    background: #ececec;
-    transform: translateY(-1px);
-}
-
 /* ===== FOOTER ===== */
 
 .footer {
@@ -2287,25 +2216,12 @@ body.welcome-page .primary-btn {
   }
 }
 
-
-
-/* ===== ABOUT / SUPPORT ===== */
-
-.todo-text {
-    text-align: center;
-    margin-top: 140px;
-    font-size: 18px;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.8);
-}
-
 /* SUPPORT PAGE -------------------------------- */
 
 .support-page {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 60px;
 }
 
 .support-box {
@@ -2415,10 +2331,9 @@ body.welcome-page .primary-btn {
     transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* FORCE text colour (this is the key fix) */
 .toast,
 .toast * {
-    color: #0f5132 !important;   /* DARK GREEN TEXT */
+    color: #0f5132 !important;
 }
 
 /* Visible state */
