@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard – StudyHive</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="logo-area">
+            <div class="logo-icon"></div>
+            <span class="logo-text">Study<span>Hive</span></span>
+        </div>
+
+        <nav class="main-nav">
+            <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
+            <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
+            <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
+            <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
+        </nav>
+    </div>
+    <div class="admin-container">
+        <div class="admin-header">
+            <div>
+                <h1>Welcome, {{ admin }}</h1>
+                <p class="admin-subtitle">StudyHive Admin Dashboard</p>
+            </div>
+
+            <a href="{{ url_for('admin_logout') }}" class="admin-logout-btn">
+                Logout
+            </a>
+        </div>
+
+        <!-- STATS -->
+        <div class="admin-stats">
+
+            <div class="stat-card">
+                <h3>Total Reports</h3>
+                <span>{{ total }}</span>
+            </div>
+
+            <div class="stat-card warning">
+                <h3>Unresolved</h3>
+                <span>{{ unresolved }}</span>
+            </div>
+
+            <div class="stat-card success">
+                <h3>Resolved</h3>
+                <span>{{ resolved }}</span>
+            </div>
+
+        </div>
+
+        <a href="{{ url_for('admin_support') }}" class="admin-view-reports-btn">
+            View all support reports
+        </a>
+
+        <!-- CHART -->
+        <div class="chart-box">
+            <h3>Report Status</h3>
+
+            <div class="bar">
+                <div class="bar-fill unresolved"
+                    style="--percent: {{ (unresolved / total * 100) if total else 0 }}%;">
+                </div>
+            </div>
+            <small>Unresolved</small>
+
+            <div class="bar">
+                <div class="bar-fill resolved"
+                    style="--percent: {{ (resolved / total * 100) if total else 0 }}%;">
+                </div>
+            </div>
+            <small>Resolved</small>
+        </div>
+
+        <!-- LATEST REPORTS -->
+        <div class="latest-box">
+            <h3>Latest Reports</h3>
+
+            {% for r in latest_reports %}
+                <div class="latest-item">
+                    <strong>{{ r[0] }}</strong>
+                    <p>{{ r[1][:80] }}...</p>
+                    <span class="{{ 'resolved' if r[2] else 'unresolved' }}">
+                        {{ 'Resolved' if r[2] else 'Pending' }}
+                    </span>
+                    <small>{{ r[3] }}</small>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</body>
+</html>

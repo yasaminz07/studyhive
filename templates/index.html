@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>StudyHive – Welcome</title>
+    <link rel="stylesheet" href="static/css/style.css" />
+</head>
+
+<body class="welcome-page">
+
+    <header class="main-header">
+        <div class="logo-area">
+            <span class="logo-text">Study<span>Hive</span></span>
+        </div>
+
+        <nav class="main-nav">
+            <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
+            <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
+            <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
+        </nav>
+
+        <div class="header-right">
+            <a href="#" class="login-btn" id="openLogin">LOGIN</a>    
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="welcome-layout">
+
+            <!-- LEFT SIDE WITH IMAGE -->
+            <div class="welcome-left">
+
+                <!-- IMAGE FROM URL -->
+                <img
+                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644"
+                    alt="Study illustration"
+                    class="welcome-img"
+                />
+
+                <div class="welcome-overlay"></div>
+
+                <div class="welcome-text">
+                    <h1>
+                        WELCOME TO<br>
+                        <span>Study<span class="hive">Hive</span></span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="welcome-right">
+                <div class="hero-card">
+                    <p class="hero-text">
+                        A one stop website for all your educational needs.
+                    </p>
+                </div>
+
+                <a href="#" class="primary-btn" id="getStartedBtn">Get Started</a>
+            </div>
+
+        </section>
+    </main>
+    <!-- LOGIN MODAL -->
+            <div id="loginModal" class="modal">
+                <div class="modal-content">
+                    <button class="close-modal" id="closeLogin">×</button>
+
+                    <h2>Log In</h2>
+                    <p class="terms">
+                        By continuing, you agree to our 
+                        <a href="#">User Agreement</a> and our 
+                        <a href="#">Privacy Policy</a>.
+                    </p>
+
+                    <input type="text" id="loginUsername" placeholder="Username" class="input-box">
+                    <input type="password" id="loginPassword" placeholder="Password" class="input-box">
+
+                    <a href="#" class="forgot" id="forgotPassword">Forgot password?</a>
+                    <a href="#" class="modal-link" id="switchToSignup">Don’t have an account? Sign up</a>
+
+                    <a class="login-btn-modal" href="#" id="loginSubmit">Log In</a>
+                </div>
+            </div>
+
+            <!-- FORGOT PASSWORD MODAL -->
+            <div id="forgotModal" class="modal">
+                <div class="modal-content">
+                    <button class="close-modal" id="closeForgot">×</button>
+
+                    <h2>Reset Password</h2>
+                    <p class="terms">
+                        Enter your email address and we will send you a reset link.
+                    </p>
+
+                    <input type="email" id="forgotEmail" placeholder="Enter your email" class="input-box">
+
+                    <button class="login-btn-modal" id="forgotSubmit">Send Reset Link</button>
+                </div>
+            </div>
+
+            <!-- SIGNUP MODAL -->
+            <div id="signupModal" class="modal">
+                <div class="modal-content">
+                    <button class="close-modal" id="closeSignup">×</button>
+
+                    <h2>Sign Up</h2>
+                    <p class="terms">
+                        Create an account to join StudyHive and access all features.
+                    </p>
+
+                    <input type="text" id="signupFirstName" placeholder="First Name" class="input-box">
+                    <input type="text" id="signupLastName" placeholder="Last Name" class="input-box">
+                    <input type="text" id="signupUsername" placeholder="Username" class="input-box">
+                    <input type="email" id="signupEmail" placeholder="Email Address" class="input-box">
+                    <input type="password" id="signupPassword" placeholder="Create Password" class="input-box">
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" class="input-box">
+
+                    <p id="signupError" class="error-text" style="display:none;"></p>
+
+                    <a href="#" class="modal-link" id="switchToLogin">Already have an account? Log in</a>
+
+                    <button class="login-btn-modal" id="signupSubmit">Create Account</button>
+                </div>
+            </div>
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p>Curzon Building<br>
+                    4 Cardigan Street<br>
+                    Birmingham<br>
+                    B4 7BD<br>
+                    United Kingdom<br>
+                    +44 (0)121 331 5000
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p>Our Schools<br>
+                    Our subjects
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Connect</h3>
+                <div class="footer-icons">
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-linkedin"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-brands fa-tiktok"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+    <script src="/static/js/main.js"></script>
+
+</body>
+</html>
