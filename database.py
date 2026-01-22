@@ -3,18 +3,24 @@ import psycopg2
 import sqlite3
 
 def get_db_connection():
-    use_neon = os.getenv("USE_NEON")
+    database_url = os.getenv("DATABASE_URL")
 
-    if use_neon == "true":
-        url = os.getenv("DATABASE_URL")
-        return psycopg2.connect(url, sslmode="require")
-    else:
-        db_path = os.getenv("LOCAL_DB_PATH", "local.db")
-        return sqlite3.connect(db_path)
+    # If DATABASE_URL exists → use Neon (Postgres)
+    if database_url:
+        return psycopg2.connect(database_url)
+
+    # Otherwise → use local SQLite
+    db_path = os.getenv("LOCAL_DB_PATH", "local.db")
+    return sqlite3.connect(db_path)
 
 
 def init_db():
-    conn = get_db_connection()
+    # Only create tables for SQLite (local dev)
+    database_url = os.getenv("DATABASE_URL")
+    if database_url:
+        return  # Do nothing on Neon
+
+    conn = sqlite3.connect(os.getenv("LOCAL_DB_PATH", "local.db"))
     cur = conn.cursor()
 
     cur.execute("""
