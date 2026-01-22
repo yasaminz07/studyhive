@@ -1,0 +1,176 @@
+/* ===== CREATE POST MODAL ===== */
+
+#createPostModal {
+    display: none;
+}
+
+.create-post-box {
+    background: linear-gradient(180deg, #3a3218, #2a2412);
+    width: 360px;
+    padding: 32px 28px;
+    border-radius: 18px;
+    text-align: center;
+    color: white;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+.create-post-box h2 {
+    font-size: 22px;
+    margin-bottom: 22px;
+    font-weight: 600;
+}
+
+.post-label {
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    margin-bottom: 6px;
+    color: #e6d8a3;
+    font-weight: 600;
+}
+
+.post-input,
+.post-textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.35);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.post-textarea {
+    height: 80px;
+    resize: none;
+}
+
+.post-input::placeholder,
+.post-textarea::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.post-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    margin-bottom: 22px;
+    justify-content: center;
+    color: #ddd;
+}
+
+.post-submit-btn {
+    background: #e3e3e3;
+    color: #111;
+    border: none;
+    padding: 10px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.post-submit-btn:hover {
+    transform: scale(1.05);
+}
+
+/* CLOSE BUTTON */
+.create-post-box .close-modal {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+}
+
+/* ===== COMMENTS PANEL (under posts) ===== */
+
+/* ===== NEW COMMENTS PANEL (matches posts.js injected HTML) ===== */
+
+.comments-panel {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.comment-item {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.comment-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+  opacity: 0.95;
+}
+
+.comment-time {
+  font-size: 12px;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.comment-content {
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.comment-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.comment-form .comment-input {
+  flex: 1;
+  padding: 12px;
+  background: #2d332d;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px;
+  outline: none;
+  color: white;
+  font-size: 14px;
+}
+
+.comment-form .comment-input::placeholder {
+  color: #8e9e8e;
+}
+
+.comment-form button {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: #e3e3e3;
+  font-weight: bold;
+  transition: 0.15s;
+}
+
+.comment-form button:hover {
+  background: white;
+}
+
+.comment-error {
+  margin-top: 8px;
+  font-size: 13px;
+  opacity: 0.9;
+}

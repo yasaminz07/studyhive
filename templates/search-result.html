@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>StudyHive – Search</title>
+        <link rel="stylesheet" href="static/css/base.css" />
+        <link rel="stylesheet" href="static/css/header.css">
+        <link rel="stylesheet" href="static/css/modals.css">
+        <link rel="stylesheet" href="static/css/explore.css">
+        <link rel="stylesheet" href="static/css/responsive.css">
+    </head>
+    <body>
+        <div class="">
+            <header class="main-header">
+                <!-- LEFT: Logo -->
+                <div class="logo-area">
+                    <div class="logo-icon"></div>
+                    <span class="logo-text">Study<span>Hive</span></span>
+                </div>
+                <!-- CENTER: Nav -->
+                <nav class="main-nav">
+                    <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
+                    <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
+                    <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
+                    <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
+                </nav>
+                <!-- RIGHT: Search + Profile -->
+                <div class="header-actions">
+                    <!-- PROFILE -->
+                    <div class="profile-area" id="profileArea">
+                        <span class="profile-name">{{ user_name }}</span>
+                        <img src="{{ url_for('static', filename='assets/profile.png') }}" class="profile-icon">
+
+                        <div class="profile-menu" id="profileMenu">
+                            <a href="{{ url_for('profile') }}">View Profile</a>
+                            <a href="#" id="toggleTheme">Toggle Light</a>
+                            <a href="{{ url_for('support_page') }}">Support</a>
+                            <a href="#" onclick="showSignOut()">Sign Out</a>
+                        </div>
+                    </div>
+                    <!-- SIGN OUT MODAL SHOULD BE OUTSIDE -->
+                    <div class="modal-overlay" id="signOutModal">
+                        <div class="modal-box">
+                            <h2>Sign Out</h2>
+                            <p>Are you sure you wish to sign out?<br>
+                            You will need to login again if you wish to proceed.</p>
+                            <button href="index.html" class="signout-btn" onclick="signOut()">Sign Out</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- SEARCH -->
+            <div class="search-section">
+                <form class="search-bar" action="/explore" method="GET">
+                    <input type="text" name="studyhive_search" id="searchInput" placeholder="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                    <button class="search-icon" type="submit">
+                        <img src="{{ url_for('static', filename='assets/icons/bookmark.png') }}" class="search-img">
+                    </button>
+                </form>
+            </div>
+            <div class="result">
+                
+            </div>
+
+        <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/explore.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    </body>
+</html>

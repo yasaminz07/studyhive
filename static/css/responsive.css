@@ -1,0 +1,238 @@
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 900px) {
+    .welcome-layout {
+        grid-template-columns: 1fr;
+    }
+    .main-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .subject-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .post-grid {
+    grid-template-columns: 1fr;
+    }
+}
+
+/* ===== MOBILE BOTTOM NAV (INSTAGRAM STYLE + PROFILE) ===== */
+@media (max-width: 750px) {
+
+    .page-wrap,
+    .main-content {
+        padding-bottom: 100px !important;
+    }
+    /* Make header the bottom bar */
+    .main-header {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        background: rgba(33, 48, 29, 0.95);
+        backdrop-filter: blur(6px);
+        border-top: 1px solid rgba(255,255,255,0.15);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        flex-direction: row !important;   /* force horizontal bar */
+        z-index: 3000;
+    }
+
+    /* Hide logo + search */
+    .logo-area,
+    .search-wrapper {
+        display: none !important;
+    }
+
+    /* Make the main nav fill the bar */
+    .main-nav {
+        flex: 4;
+        display: flex !important;
+        justify-content: space-around;
+        align-items: center;
+        height: 100%;
+    }
+
+    /* Nav pill buttons */
+    .nav-pill {
+        flex: 1;
+        text-align: center;
+        padding: 12px 0;
+        background: transparent !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        font-size: 14px;
+    }
+    .main-header a.nav-pill {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .nav-pill.active {
+        color: #ffd26b !important;
+    }
+
+    /* ===== ADD PROFILE TO BOTTOM NAV ===== */
+
+    /* Show profile in bar */
+    .header-right {
+        flex: 1;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-area {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-name {
+        display: none; /* hide text, too long for bottom nav */
+    }
+
+    .profile-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+    }
+
+    /* Hide dropdown menu on mobile */
+    .profile-menu {
+        display: none !important;
+    }
+
+    .main-content {
+        padding-bottom: 85px !important;
+    }
+}
+
+/* welcome page responsiveness */
+/* responsive */
+@media (max-width: 900px) {
+  body.welcome-page .welcome-layout {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  body.welcome-page .welcome-text h1 {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 900px) {
+    .welcome-layout {
+        grid-template-columns: 1fr;
+    }
+    .main-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .subject-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .post-grid {
+    grid-template-columns: 1fr;
+    }
+}
+
+/* ===== MOBILE BOTTOM NAV (INSTAGRAM STYLE + PROFILE) ===== */
+@media (max-width: 750px) {
+
+    .page-wrap,
+    .main-content {
+        padding-bottom: 100px !important;
+    }
+    /* Make header the bottom bar */
+    .main-header {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        background: rgba(33, 48, 29, 0.95);
+        backdrop-filter: blur(6px);
+        border-top: 1px solid rgba(255,255,255,0.15);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        flex-direction: row !important;   /* force horizontal bar */
+        z-index: 3000;
+    }
+
+    /* Hide logo + search */
+    .logo-area,
+    .search-wrapper {
+        display: none !important;
+    }
+
+    /* Make the main nav fill the bar */
+    .main-nav {
+        flex: 4;
+        display: flex !important;
+        justify-content: space-around;
+        align-items: center;
+        height: 100%;
+    }
+
+    /* Nav pill buttons */
+    .nav-pill {
+        flex: 1;
+        text-align: center;
+        padding: 12px 0;
+        background: transparent !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        font-size: 14px;
+    }
+    .main-header a.nav-pill {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .nav-pill.active {
+        color: #ffd26b !important;
+    }
+
+    /* ===== ADD PROFILE TO BOTTOM NAV ===== */
+
+    /* Show profile in bar */
+    .header-right {
+        flex: 1;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-area {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-name {
+        display: none; /* hide text, too long for bottom nav */
+    }
+
+    .profile-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+    }
+
+    /* Hide dropdown menu on mobile */
+    .profile-menu {
+        display: none !important;
+    }
+
+    .main-content {
+        padding-bottom: 85px !important;
+    }
+}

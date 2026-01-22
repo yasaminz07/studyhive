@@ -1,0 +1,186 @@
+/* ===== PROFILE PAGES ===== */
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.profile-main-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.profile-title-row {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+    gap: 5px;
+}
+.profile-title-row h2, 
+.profile-title-row {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+.profile-subtitle {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 13px;
+    margin: 4px 0px;
+}
+
+.profile-body-layout .section-row {
+    margin-bottom: 26px;
+}
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.friends-strip {
+    display: flex;
+    gap: 10px;
+}
+
+.profile-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.follow-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.06);
+    text-align: center;
+}
+
+.follow-number {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.follow-label {
+    font-size: 11px;
+    opacity: 0.75;
+    margin-top: 2px;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 12px;
+    margin: 12px 0;
+}
+
+/* Reset ugly button styles */
+.stat-card {
+    all: unset;                 /* 🔥 removes default button styles */
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: white;
+    font-family: inherit;
+    text-align: center;
+    transition: transform 0.15s ease, background 0.15s ease, border 0.15s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    background: rgba(0,0,0,0.45);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.stat-number {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 14px;
+}
+
+/* Followings list CSS */
+.followers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.follower-item a {
+    text-decoration: none;
+    color: inherit;
+    padding: 10px;
+    border-radius: 8px;
+    display: block;
+}
+
+.follower-item a:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.secondary-btn {
+    color: #fff;
+    border-radius: 600px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: scale(1.04);
+}
+
+#editProfileBtn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 600px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+/* ===============================
+   PROFILE PAGE – BIG AVATAR
+================================ */
+
+/* Big profile avatar container */
+.profile-header .avatar-large,
+.profile-header img.profile-icon {
+    width: 170px;
+    height: 170px;
+    border-radius: 70%;
+    object-fit: cover;
+    border: 3px rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Optional glow / depth */
+.profile-header .avatar-large,
+.profile-header img.profile-avatar {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+}

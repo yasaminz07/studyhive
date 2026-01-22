@@ -1,0 +1,64 @@
+/* ===== RESET ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #f5f5f5;
+
+    background: linear-gradient(180deg, #0e140c, #6F4F00);
+    background-attachment: fixed;
+    height: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+
+/* ===== APP WRAPPER ===== */
+/*.app-shell {
+    width: 100%;
+    max-width: 1280px;
+    margin: 12px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: radial-gradient(circle at 0 0, #293825 0, #131916 55%, #050808 100%);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+}*/
+
+.main-content {
+    padding: 24px 32px 32px;
+    overflow-y: auto;
+}
+.page-wrap {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* User Accounts - Posts */
+.author-name {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: 600;
+}
+
+.author-name:hover {
+    text-decoration: underline; /* optional hover effect */
+    opacity: 0.85;
+}
+
+.post-author a {
+    text-decoration: none;
+}

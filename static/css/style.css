@@ -1202,6 +1202,7 @@ body {
     from { opacity: 0; transform: scale(0.97); }
     to { opacity: 1; transform: scale(1); }
 }
+
 /* ===== CREATE POST MODAL ===== */
 
 #createPostModal {
@@ -2035,9 +2036,6 @@ body.messages-page .chat-view{
     }
 }
 
-
-
-
 /* ✅ Welcome page background override */
 body.welcome-page,
 body.welcome-page html {
@@ -2567,7 +2565,7 @@ body.welcome-page .primary-btn {
     opacity: 0.75;
 }
 
-/* ===== TOP NAV BAR ===== */
+/* ===== TOP NAV BAR - Yazzy Fix ===== */
 
 
 

@@ -1,0 +1,433 @@
+/* === MESSAGES ===*/
+.messages-body {
+    margin: 0;
+    background: #111;
+    color: white;
+}
+
+/* PAGE LAYOUT */
+.messages-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* FRIENDS COLUMN */
+.friends-column {
+    width: 80px;
+    background: #181e18;
+    border-right: 1px solid #222;
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.friend-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.friend-avatar:hover {
+    box-shadow: 0 0 8px rgba(120,255,120,0.6);
+    scale: 1.05;
+}
+
+/* CONVERSATION LIST */
+.chat-list {
+    width: 22%;
+    background: #1d221d;
+    border-right: 1px solid #222;
+    overflow-y: auto;
+}
+
+.chat-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #222;
+    transition: 0.15s;
+}
+
+.chat-item:hover {
+    background: #253325;
+}
+
+.chat-item.active {
+    background: #2f432f;
+}
+
+.chat-name {
+    font-weight: bold;
+}
+
+.chat-preview {
+    display: block;
+    font-size: 12px;
+    color: #bbb;
+}
+
+.chat-time {
+    float: right;
+    font-size: 11px;
+    margin-top: -20px;
+    color: #888;
+}
+
+/* CHAT WINDOW */
+.chat-window {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-topbar {
+    background: #182118;
+    padding: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #222;
+}
+
+/* MESSAGES */
+.chat-messages {
+    flex-grow: 1;
+    padding: 14px;
+    overflow-y: auto;
+}
+
+.msg-row {
+    margin-bottom: 12px;
+}
+
+.msg {
+    background: #2d3e2d;
+    padding: 10px 14px;
+    border-radius: 12px;
+    color: white;
+    display: inline-block;
+}
+
+.msg-row.sent {
+    text-align: right;
+}
+
+.msg-row.sent .msg {
+    background: #3b5d3b;
+}
+
+/* INPUT BAR */
+.chat-input-bar {
+    padding: 12px;
+    background: #1a1f1a;
+    border-top: 1px solid #222;
+    display: flex;
+    gap: 8px;
+}
+
+.chat-input {
+    flex-grow: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: #2a2f2a;
+    color: white;
+    font-size: 14px;
+}
+
+.send-btn {
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    background: #e3e3e3;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.send-btn:hover {
+    background: white;
+}
+
+/* new new new*/
+
+/* ===============================
+   MESSAGES – INBOX + CHAT VIEW
+================================ */
+
+body.messages-page .messages-main{
+  padding: 0;
+  padding-top: 90px;
+  overflow: hidden;
+}
+
+/* -------- INBOX VIEW (LIST) -------- */
+body.messages-page .inbox-view{
+  display: flex;
+  height: calc(100vh - 90px);
+  width: 100%;
+}
+
+/* friends bubbles */
+body.messages-page .friends-column{
+  width: 80px;
+  background: #181e18;
+  border-right: 1px solid #222;
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+body.messages-page .friend-avatar{
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #7a3a3a;
+  cursor: pointer;
+  transition: 0.2s;
+}
+body.messages-page .friend-avatar:hover{
+  box-shadow: 0 0 10px rgba(120,255,120,0.5);
+  transform: scale(1.05);
+}
+
+/* user list */
+body.messages-page .chat-list.simple-list{
+  width: 320px;
+  background: rgba(18,22,18,0.95);
+  border-right: 2px solid rgba(255, 255, 255, 0.6);
+  overflow-y: auto;
+}
+
+body.messages-page .chat-item.simple{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+}
+body.messages-page .chat-item.simple:hover{
+  background: rgba(255,255,255,0.03);
+}
+
+body.messages-page .chat-avatar{
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #7a3a3a;
+}
+body.messages-page .chat-name{
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+body.messages-page .empty-panel{
+  flex: 1;
+  background: transparent;
+}
+
+/* -------- CHAT VIEW (SCREENSHOT STYLE) -------- */
+body.messages-page .chat-view{
+  display: none;               /* hidden until you click a username */
+  height: calc(100vh - 90px);
+  width: 100%;
+  flex-direction: column;
+  background: rgba(20, 22, 20, 0.92);
+  border-left: 2px solid rgba(80,200,255,0.6);
+  border-right: 2px solid rgba(80,200,255,0.6);
+}
+
+/* top bar */
+body.messages-page .chat-topbar-2{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(0,0,0,0.25);
+  border-bottom: 2px solid rgba(80,200,255,0.6);
+}
+
+body.messages-page .back-btn{
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+body.messages-page .chat-top-user{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+body.messages-page .chat-top-avatar{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #7a3a3a;
+}
+body.messages-page .chat-top-name{
+  font-weight: 700;
+}
+
+/* chat body */
+body.messages-page .chat-body{
+  flex: 1;
+  padding: 18px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* rows */
+body.messages-page .msg-row{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body.messages-page .msg-row.received{
+  justify-content: flex-start;
+}
+
+body.messages-page .msg-row.sent{
+  justify-content: flex-end;
+}
+
+/* left avatar on received */
+body.messages-page .msg-avatar{
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #7a3a3a;
+  flex-shrink: 0;
+}
+
+/* bubbles */
+body.messages-page .bubble{
+  width: 240px;
+  height: 64px;
+  border-radius: 26px;
+  position: relative;
+}
+
+/* received bubble (orange-ish) */
+body.messages-page .bubble-received{
+  background: linear-gradient(180deg, rgba(255,140,90,0.95), rgba(210,110,80,0.95));
+}
+
+/* sent bubble (yellow-ish) */
+body.messages-page .bubble-sent{
+  background: linear-gradient(180deg, rgba(255,225,140,0.95), rgba(235,205,120,0.95));
+}
+
+/* tails */
+body.messages-page .bubble-received::after{
+  content:"";
+  position:absolute;
+  left:-10px;
+  bottom: 16px;
+  width: 16px;
+  height: 16px;
+  background: inherit;
+  transform: rotate(45deg);
+  border-radius: 4px;
+}
+body.messages-page .bubble-sent::after{
+  content:"";
+  position:absolute;
+  right:-10px;
+  bottom: 16px;
+  width: 16px;
+  height: 16px;
+  background: inherit;
+  transform: rotate(45deg);
+  border-radius: 4px;
+}
+
+/* input bar */
+body.messages-page .chat-input-2{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-top: 2px solid rgba(80,200,255,0.6);
+  background: rgba(0,0,0,0.22);
+}
+
+body.messages-page .chat-text{
+  flex: 1;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  padding: 0 14px;
+  background: rgba(30, 33, 30, 0.85);
+  color: white;
+}
+
+body.messages-page .chat-attach{
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(30, 33, 30, 0.85);
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+body.messages-page .chat-send{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(30, 33, 30, 0.85);
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* 3-column layout */
+body.messages-page .messages-layout{
+  display: flex;
+  height: calc(100vh - 90px);
+  width: 100%;
+}
+
+/* keep your friends-column + chat-list as is */
+
+/* Right side panel */
+body.messages-page .chat-panel{
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+/* placeholder */
+body.messages-page .chat-empty{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  font-size: 14px;
+}
+
+/* chat view should fill ONLY the right panel */
+body.messages-page .chat-view{
+  display: none;                 /* hidden until a user is clicked */
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  background: rgba(20, 22, 20, 0.92);
+  border-left: 2px solid rgba(80,200,255,0.6);
+  border-right: none;            /* don't outline whole page */
+}

@@ -1,0 +1,491 @@
+/* ===== HEADER / NAV ===== */
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 72px;
+    background: #131916;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    overflow: visible; /* IMPORTANT for modal */
+}
+
+/* Use grid to align left / center / right */
+.main-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 0 24px;
+}
+
+/* ================================
+   LOGO
+================================ */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ffb300, #ff6f00);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-text {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 22px;
+}
+.logo-text span {
+    color: #ffb300;
+}
+
+/* ================================
+   NAV (CENTERED PROPERLY)
+================================ */
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.nav-pill {
+    min-width: 110px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    background: #795114;
+    color: #f2f2f2;
+    font-size: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.nav-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.45);
+}
+
+.nav-pill.active {
+    background: #795114;
+}
+
+.nav-pill-plus {
+    min-width: 10px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: #bb0239;
+    color: #f2f2f2;
+    font-size: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.nav-pill-plus:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.45);
+}
+
+.nav-pill-plus.active {
+    background: #795114;
+}
+
+/* ================================
+   RIGHT SIDE (PROFILE)
+================================ */
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* PROFILE */
+.profile-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+}
+
+.profile-name {
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* DROPDOWN */
+.profile-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: #413924;
+    width: 170px;
+    padding: 20px 0;
+    border-radius: 20px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 9999;
+}
+
+.profile-menu a {
+    display: block;
+    padding: 10px 0;
+    color: white;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.profile-menu a:hover {
+    opacity: 0.7;
+}
+
+/* ================================
+   MODAL (SIGN OUT)
+================================ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    padding: 24px;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: #1D241F;
+    padding: 40px;
+    width: 420px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+}
+
+.modal-box h2 {
+    font-size: 26px;
+    margin-bottom: 18px;
+}
+
+.modal-box p {
+    font-size: 14px;
+    color: #cccccc;
+    line-height: 18px;
+    margin-bottom: 25px;
+}
+
+.signout-btn {
+    width: 80%;
+    background: #e3e3e3;
+    padding: 12px 0;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#signOutModal {
+    display: none;
+}
+
+/* ================================
+   SEARCH SECTION (UNDER HEADER)
+================================ */
+
+.search-bar {
+    background: #795114;
+    padding: 10px 18px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 420px;
+    max-width: 90%;
+}
+
+.search-bar input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 15px;
+}
+
+.search-bar input::placeholder {
+    color: rgba(255,255,255,0.8);
+}
+
+.search-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-icon img {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1);
+}
+
+/* ===== BUTTONS / BADGES ===== */
+
+.primary-btn,
+.secondary-btn,
+.link-btn {
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+.primary-btn {
+    background: #6f8f5f;
+    color: #f7f7f7;
+    padding: 10px 26px;
+    font-size: 15px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+}
+.primary-btn.small {
+    padding: 6px 18px;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.secondary-btn {
+    background: transparent;
+    color: #f5f5f5;
+    font-size: 14px;
+}
+
+.link-btn {
+    background: transparent;
+    color: #d0e2c0;
+    padding: 0;
+    font-size: 13px;
+}
+
+/* ===== AVATARS / BADGES ===== */
+
+.avatar-circle,
+.avatar-large {
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #444;
+    color: #fff;
+    font-weight: 600;
+}
+.avatar-circle {
+    width: 42px;
+    height: 42px;
+    font-size: 14px;
+}
+.avatar-large {
+    width: 80px;
+    height: 80px;
+    font-size: 28px;
+}
+.avatar-circle.red,
+.avatar-large.red {
+    background: #b53939;
+}
+.avatar-circle.orange {
+    background: #c77b2b;
+}
+.avatar-circle.purple {
+    background: #7e5ada;
+}
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.badge-red {
+    background: #b53939;
+    color: #fff;
+}
+.badge-green {
+    background: #4e9a4e;
+    color: #fff;
+}
+/* PROFILE SECTION */
+.profile-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+}
+
+.profile-name {
+    color: white;
+    font-weight: 600;
+}
+
+/* DROPDOWN MENU */
+.profile-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: #413924;
+    width: 170px;
+    padding: 20px 0;
+    border-radius: 20px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 999;
+}
+
+.profile-menu a {
+    display: block;
+    padding: 10px 0;
+    color: white;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.profile-menu a:hover {
+    opacity: 0.7;
+}
+.light-mode {
+    background: white;
+    color: black;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;        /* <-- fixed */
+  padding: 24px;        /* <-- prevents clipping */
+  overflow-y: auto;     /* <-- allows scrolling */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: #1D241F;
+  padding: 40px;
+  width: 420px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+.modal-box h2 {
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+.modal-box p {
+  font-size: 14px;
+  color: #cccccc;
+  line-height: 18px;
+  margin-bottom: 25px;
+}
+
+.signout-btn {
+  width: 80%;
+  background: #e3e3e3;
+  padding: 12px 0;
+  font-weight: bold;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+#signOutModal {
+  display: none;
+}
+
+/* Search bar CSS */
+/* SEARCH SECTION UNDER HEADER */
+.search-section {
+    margin-top: 72px; /* pushes it below fixed header */
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    z-index: 10;
+}
+
+/* SEARCH BAR */
+.search-bar {
+    background: #795114;
+    padding: 10px 18px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 420px;
+    max-width: 90%;
+}
+
+.search-bar input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 15px;
+}
+
+.search-bar input::placeholder {
+    color: rgba(255,255,255,0.8);
+}
+
+.search-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-icon img {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1);
+}

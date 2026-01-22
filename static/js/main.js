@@ -65,7 +65,7 @@ function showSignOut() {
 
 function signOut() {
     localStorage.clear();
-    window.location.href = "index.html";
+    window.location.href = "/";
 }
 
 
@@ -120,62 +120,6 @@ function shareToX() {
 function shareToSnapchat() {
     alert("Snapchat sharing will be implemented");
 }
-
-
-/* =========================================================
-   8) Escape key closes modals
-========================================================= */
-document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") {
-        hideReportModal();
-        hideShareModal();
-        if (loginModal) loginModal.style.display = "none";
-        if (signupModal) signupModal.style.display = "none";
-    }
-});
-
-/* =========================================================
-   9) Comment system — Expandable reply boxes
-========================================================= */
-function openComment(id) {
-    event.stopPropagation();
-    document.getElementById("commentBox" + id).style.display = "block";
-}
-
-function closeComment(id) {
-    document.getElementById("commentBox" + id).style.display = "none";
-}
-
-function sendComment(id) {
-    let input = document.getElementById("commentInput" + id);
-    let text = input.value.trim();
-
-    if (text === "") return;
-
-    console.log("Comment submitted:", text);
-
-    input.value = "";
-}
-
-// CLOSE COMMENT WHEN CLICKING OUTSIDE
-document.addEventListener("click", function(e) {
-    const commentBoxes = document.querySelectorAll(".comment-box");
-
-    commentBoxes.forEach(box => {
-        if (box.style.display === "block" && !box.contains(e.target)) {
-            box.style.display = "none";
-        }
-    });
-});
-
-// ESC KEY CLOSE
-document.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") {
-        const commentBoxes = document.querySelectorAll(".comment-box");
-        commentBoxes.forEach(box => box.style.display = "none");
-    }
-});
-
 
 /* =========================================================
    10) Chat Messaging System (messages.html)
@@ -232,6 +176,7 @@ if (chatSearch) {
 // ================= MODAL ELEMENTS =================
 const loginModal = document.getElementById("loginModal");
 const signupModal = document.getElementById("signupModal");
+const signOutModal = document.getElementById("signOutModal");
 
 const openLogin = document.getElementById("openLogin");
 const closeLogin = document.getElementById("closeLogin");
@@ -429,6 +374,7 @@ if (switchToLogin && loginModal && signupModal) {
 window.addEventListener("click", function(e) {
     if (e.target === loginModal) loginModal.style.display = "none";
     if (e.target === signupModal) signupModal.style.display = "none";
+    if (e.target === signOutModal) signOutModal.style.display = "none";
 });
 
 // =================== PREVENT ACCIDENTAL CLOSE =================== 
@@ -451,6 +397,14 @@ if (signupModal) {
     }
 }
 
+if (signOutModal) {
+    const signOutBox = signOutModal.querySelector(".modal-box");
+    if (signOutBox) {
+        signOutBox.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+    }
+}
 
 
 /* =========================================================
@@ -524,7 +478,5 @@ function showToast(message) {
         }, 300);
     }, 3000);
 }
-
-
 
 

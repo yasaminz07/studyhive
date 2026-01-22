@@ -1,0 +1,39 @@
+/* ===== FOOTER ===== */
+
+.footer {
+    background: #2a1d14;
+    padding: 40px 0;
+    color: #fff;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+.footer-column p {
+    line-height: 1.6;
+    font-size: 14px;
+    color: #e6e6e6;
+}
+
+/* Icons */
+.footer-icons i {
+    font-size: 22px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+.footer-icons i:hover {
+    opacity: 0.7;
+}

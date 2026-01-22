@@ -3,42 +3,44 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyHive – User Profile</title>
-    <link rel="stylesheet" href="static/css/style.css" />
+    <title>StudyHive – {{ profile_user.first_name }} {{ profile_user.last_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modals.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
 </head>
 <body>
 <div class="page-wrap">
     <header class="main-header">
+        <!-- LEFT: Logo -->
         <div class="logo-area">
             <div class="logo-icon"></div>
             <span class="logo-text">Study<span>Hive</span></span>
         </div>
-
+        <!-- CENTER: Nav -->
         <nav class="main-nav">
-            <a href="home.html" class="nav-pill active">Home</a>
-            <a href="explore.html" class="nav-pill">Explore</a>
-            <a href="about.html" class="nav-pill">About Us</a>
-            <a href="messages.html" class="nav-pill">Messages</a>
-
+            <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
+            <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
+            <a href="{{ url_for('explore') }}" class="nav-pill-plus">+</a>
+            <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
+            <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
         </nav>
+        <!-- RIGHT: Profile -->
+        <div class="header-actions">
+            <!-- PROFILE -->
+            <div class="profile-area" id="profileArea">
+                <span class="profile-name">{{ user_name }}</span>
+                <img src="{{ session.get('profile_image') or url_for('static', filename='assets/profile.png') }}" class="profile-icon"/>
 
-        <div class="header-right">
-            <div class="search-wrapper">
-                <input type="text" placeholder="Search" />
-                <button class="icon-btn">🔍</button>
+                <div class="profile-menu" id="profileMenu">
+                    <a href="{{ url_for('profile') }}">View Profile</a>
+                    <a href="#" id="toggleTheme">Toggle Light</a>
+                    <a href="{{ url_for('support_page') }}">Support</a>
+                    <a href="#" onclick="showSignOut()">Sign Out</a>
+                </div>
             </div>
-            <div class="profile-area">
-            <span class="profile-name">Raashid Noor</span>
-            <img src="assets/profile.png" class="profile-icon" alt="Profile">
-
-            <!-- DROPDOWN MENU -->
-            <div class="profile-menu" id="profileMenu">
-                <a href="profile.html">View Profile</a>
-                <a href="#" id="toggleTheme">Toggle Light</a>
-                <a href="support.html">Support</a>
-                <a href="#" onclick="showSignOut()">Sign Out</a>
-            </div>
-
             <!-- SIGN OUT MODAL SHOULD BE OUTSIDE -->
             <div class="modal-overlay" id="signOutModal">
                 <div class="modal-box">
@@ -48,26 +50,46 @@
                     <button href="index.html" class="signout-btn" onclick="signOut()">Sign Out</button>
                 </div>
             </div>
-
-        </div>
-
         </div>
     </header>
-
+    <!-- SEARCH -->
+    <div class="search-section">
+        <form class="search-bar" action="/explore" method="GET">
+            <input type="text" name="q" id="searchInput" placeholder="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <button class="search-icon" type="submit">
+                <img src="{{ url_for('static', filename='assets/icons/bookmark.png') }}" class="search-img">
+            </button>
+        </form>
+    </div>
     <main class="main-content">
         <section class="profile-header">
             <div class="profile-main-info">
-                <div class="avatar-large red">YL</div>
+                {% if profile_user.profile_image %}
+                    <img src="{{ profile_user.profile_image }}" class="profile-icon-large">
+                {% else %}
+                    <div class="avatar-large red">
+                        {{ profile_user.first_name[0] }}{{ profile_user.last_name[0] }}
+                    </div>
+                {% endif %}
                 <div>
                     <div class="profile-title-row">
-                        <h2>Yung Limo</h2>
-                        <span class="badge badge-red">Student</span>
+                        <h2>{{ profile_user.first_name }} {{ profile_user.last_name }}</h2>
+                        <p class="profile-subtitle">@{{ profile_user.username }}</p>
                     </div>
-                    <p class="profile-subtitle">Engineering @ BWM</p>
-                    <div style="display:flex; gap:8px;">
-                        <button class="secondary-btn">Follow</button>
-                        <button class="secondary-btn">Add Friend</button>
-                        <button class="secondary-btn">Block</button>
+                    <p id="profileUsername" class="profile-subtitle"></p>
+
+                    <div class="profile-stats">
+                        <div class="stat-card" id="followersBtn">
+                            <span class="stat-number">{{ profile_user.followers }}</span>
+                            <button class="secondary-btn" id="followBtn" data-user-id="{{ profile_user.id }}">
+                                {{ "Unfollow" if is_following else "Follow" }}
+                            </button>
+                        </div>
+
+                        <button class="stat-card" id="followingBtn" data-user-id="{{ profile_user.id }}">
+                            <span class="stat-number">{{ profile_user.following }}</span>
+                            <span class="stat-label">Following</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -86,56 +108,50 @@
                     <h3>Posts</h3>
                 </div>
 
+                {% for post in posts %}
                 <article class="post-card">
                     <header class="post-header">
                         <div class="post-author">
-                            <div class="avatar-circle red">YL</div>
+                            <div class="avatar-circle red">
+                                {{ profile_user.first_name[0] }}{{ profile_user.last_name[0] }}
+                            </div>
                             <div>
-                                <span class="author-name">Yung Limo</span>
-                                <span class="post-meta">2 hours ago</span>
+                                <span class="author-name">
+                                    {{ profile_user.first_name }} {{ profile_user.last_name }}
+                                </span>
+                                <span class="post-meta">{{ post[3] }}</span>
                             </div>
                         </div>
                     </header>
                     <div class="post-body">
-                        <h3>Assistance on driveway angle swap</h3>
-                        <p class="post-placeholder"></p>
+                        <h3>{{ post[1] }}</h3>
+                        <p class="post-text">{{ post[2] }}</p>
                     </div>
-                    <footer class="post-footer">
-                        <button class="post-stat">♡ 23.6k Likes</button>
-                        <button class="post-stat">💬 2350 Comments</button>
-                        <button class="post-stat">🔖 21.8k Saved</button>
-                        <button class="post-stat">⤴ Share</button>
-                        <button class="post-stat info">ⓘ</button>
-                    </footer>
                 </article>
-
-                <article class="post-card">
-                    <header class="post-header">
-                        <div class="post-author">
-                            <div class="avatar-circle red">YL</div>
-                            <div>
-                                <span class="author-name">Yung Limo</span>
-                                <span class="post-meta">5 hours ago</span>
-                            </div>
-                        </div>
-                    </header>
-                    <div class="post-body">
-                        <h3>How to replace a differential...</h3>
-                        <p class="post-placeholder"></p>
-                    </div>
-                    <footer class="post-footer">
-                        <button class="post-stat">♡ 23.6k Likes</button>
-                        <button class="post-stat">💬 2350 Comments</button>
-                        <button class="post-stat">🔖 21.8k Saved</button>
-                        <button class="post-stat">⤴ Share</button>
-                        <button class="post-stat info">ⓘ</button>
-                    </footer>
-                </article>
+                {% endfor %}
             </div>
         </section>
     </main>
 </div>
 
-<script src="js/main.js"></script>
+<!-- FOLLOWING MODAL -->
+<div class="modal-overlay" id="followingModal">
+    <div class="modal-box">
+        <button class="close-modal" onclick="closeFollowingModal()">✕</button>
+        <h2>Following</h2>
+
+        <div id="followingList" class="followers-list">
+            <p style="opacity:0.7">Loading...</p>
+        </div>
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/posts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/comments.js') }}"></script>
+<script src="{{ url_for('static', filename='js/profile-other.js') }}"></script>
+
 </body>
 </html>

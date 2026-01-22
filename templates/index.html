@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <title>StudyHive – Welcome</title>
-    <link rel="stylesheet" href="static/css/style.css" />
+    <link rel="stylesheet" href="static/css/base.css" />
+    <link rel="stylesheet" href="static/css/header.css"/>
+    <link rel="stylesheet" href="static/css/modals.css"/>
+    <link rel="stylesheet" href="static/css/home.css"/>
+    <link rel="stylesheet" href="static/css/responsive.css"/>
+    <link rel="stylesheet" href="static/css/welcome.css"/>
+    <link rel="stylesheet" href="static/css/footer.css"/>
 </head>
 
 <body class="welcome-page">
@@ -12,12 +18,6 @@
         <div class="logo-area">
             <span class="logo-text">Study<span>Hive</span></span>
         </div>
-
-        <nav class="main-nav">
-            <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
-            <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
-            <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
-        </nav>
 
         <div class="header-right">
             <a href="#" class="login-btn" id="openLogin">LOGIN</a>    

@@ -1,0 +1,126 @@
+/* SUPPORT PAGE -------------------------------- */
+
+.support-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 150px;
+}
+
+.support-box {
+    width: 420px;
+    padding: 40px;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    text-align: center;
+}
+
+.support-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.support-input,
+.support-textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    background: #121212;
+    color: #fff;
+    font-size: 15px;
+}
+
+.support-textarea {
+    height: 120px;
+    resize: none;
+}
+
+.support-submit {
+    width: 100%;
+    padding: 12px;
+    border-radius: 26px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+}
+
+.support-submit:hover {
+    background: #ececec;
+    transform: translateY(-1px);
+}
+
+#supportForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Spinner */
+.spinner {
+    margin: 15px auto;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ddd;
+    border-top: 4px solid #df7f03;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Hide by default */
+.hidden {
+    display: none;
+}
+
+/* Animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================
+   TOAST POPUP (CENTERED)
+========================= */
+.toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+
+    background-color: #e6f7ec;   /* light green background */
+
+    padding: 20px 28px;
+    border-radius: 16px;
+
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+
+    border: 1px solid #badbcc;
+
+    box-shadow: 0 10px 25px rgba(15, 81, 50, 0.15);
+    z-index: 9999;
+
+    opacity: 0;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.toast,
+.toast * {
+    color: #0f5132 !important;
+}
+
+/* Visible state */
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
