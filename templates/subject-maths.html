@@ -1,5 +1,11 @@
+<!-- ===== FILE: subject-maths.html ===== -->
+<!-- Section headings added for readability. -->
+
 <!DOCTYPE html>
 <html lang="en">
+<!-- ========================= -->
+<!-- Document head -->
+<!-- ========================= -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +16,14 @@
     <link rel="stylesheet" href="static/css/home.css">
     <link rel="stylesheet" href="static/css/responsive.css">
 </head>
+<!-- ========================= -->
+<!-- Document body -->
+<!-- ========================= -->
 <body>
 <div class="page-wrap">
+<!-- ========================= -->
+<!-- Header / navigation -->
+<!-- ========================= -->
     <header class="main-header">
         <div class="logo-area">
             <div class="logo-icon"></div>
@@ -19,11 +31,11 @@
         </div>
 
         <nav class="main-nav">
-            <a href="home.html" class="nav-pill active">Home</a>
-            <a href="explore.html" class="nav-pill">Explore</a>
-            <a href="about.html" class="nav-pill">About Us</a>
-            <a href="messages.html" class="nav-pill">Messages</a>
-
+            <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
+            <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
+            <a href="{{ url_for('explore') }}" class="nav-pill-plus">+</a>
+            <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
+            <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
         </nav>
 
         <div class="header-right">
@@ -33,7 +45,10 @@
             </div>
             <div class="profile-area">
             <span class="profile-name">{{ user_name }}</span>
-            <img src="assets/profile.png" class="profile-icon" alt="Profile">
+            <img
+                src="{{ nav_profile_image or url_for('static', filename='assets/profile.png') }}"
+                class="profile-icon"
+            />
 
             <!-- DROPDOWN MENU -->
             <div class="profile-menu" id="profileMenu">
@@ -57,6 +72,9 @@
 
         </div>
     </header>
+<!-- ========================= -->
+<!-- Main content -->
+<!-- ========================= -->
 
     <main class="main-content">
         <div class="subject-header-bar">
@@ -98,6 +116,9 @@
                         <h3>HELP ME</h3>
                         <p class="post-placeholder"></p>
                     </div>
+<!-- ========================= -->
+<!-- Footer -->
+<!-- ========================= -->
                     <footer class="post-footer">
                         <button class="post-stat">♡ 23.6k Likes</button>
                         <button class="post-stat">💬 2350 Comments</button>
@@ -110,6 +131,9 @@
         </section>
     </main>
 </div>
+<!-- ========================= -->
+<!-- Scripts -->
+<!-- ========================= -->
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 

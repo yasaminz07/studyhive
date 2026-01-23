@@ -1,5 +1,11 @@
+<!-- ===== FILE: support.html ===== -->
+<!-- Section headings added for readability. -->
+
 <!DOCTYPE html>
 <html lang="en">
+<!-- ========================= -->
+<!-- Document head -->
+<!-- ========================= -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +18,14 @@
     <link rel="stylesheet" href="static/css/profile.css"/>
 
 </head>
+<!-- ========================= -->
+<!-- Document body -->
+<!-- ========================= -->
 <body>
 <div class="page-wrap">
+<!-- ========================= -->
+<!-- Header / navigation -->
+<!-- ========================= -->
     <header class="main-header">
         <!-- LEFT: Logo -->
         <div class="logo-area">
@@ -33,7 +45,10 @@
             <!-- PROFILE -->
             <div class="profile-area" id="profileArea">
                 <span class="profile-name">{{ user_name }}</span>
-                <img src="{{ url_for('static', filename='assets/profile.png') }}" class="profile-icon">
+                <img
+                    src="{{ nav_profile_image or url_for('static', filename='assets/profile.png') }}"
+                    class="profile-icon"
+                />
 
                 <div class="profile-menu" id="profileMenu">
                     <a href="{{ url_for('profile') }}">View Profile</a>
@@ -62,6 +77,9 @@
             </button>
         </form>
     </div>
+<!-- ========================= -->
+<!-- Main content -->
+<!-- ========================= -->
     <main class="main-content support-page">
 
         <div class="support-box">
@@ -86,6 +104,9 @@
 
     </main>
 </div>
+<!-- ========================= -->
+<!-- Scripts -->
+<!-- ========================= -->
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 

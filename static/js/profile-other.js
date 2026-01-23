@@ -1,3 +1,10 @@
+// ===== FILE: profile-other.js =====
+
+// =========================
+// Profile editing + uploads - Nafis
+//
+// DOM & state
+// =========================
 document.addEventListener("DOMContentLoaded", () => {
     const followBtn = document.getElementById("followBtn");
     const followersCard = document.getElementById("followersBtn");
@@ -80,6 +87,10 @@ if (followingBtn) {
         });
     });
 }
+
+// =========================
+// Helpers / UI
+// =========================
 
 function closeFollowingModal() {
     followingModal.style.display = "none";

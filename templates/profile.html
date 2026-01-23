@@ -1,5 +1,12 @@
+<!-- ===== FILE: profile.html ===== -->
+<!-- Section headings added for readability. -->
+<!-- Profile editing - Nafis -->
+
 <!DOCTYPE html>
 <html lang="en">
+<!-- ========================= -->
+<!-- Document head -->
+<!-- ========================= -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +18,14 @@
     <link rel="stylesheet" href="static/css/responsive.css"/>
     <link rel="stylesheet" href="static/css/profile.css"/>
 </head>
+<!-- ========================= -->
+<!-- Document body -->
+<!-- ========================= -->
 <body>
 <div class="page-wrap">
+<!-- ========================= -->
+<!-- Header / navigation -->
+<!-- ========================= -->
     <header class="main-header">
         <!-- LEFT: Logo -->
         <div class="logo-area">
@@ -23,7 +36,7 @@
         <nav class="main-nav">
             <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
             <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
-            <a href="{{ url_for('explore') }}" class="nav-pill-plus">+</a>
+            <a href="#" class="nav-pill-plus" onclick="showCreatePost()">+</a>
             <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
             <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
         </nav>
@@ -32,7 +45,10 @@
             <!-- PROFILE -->
             <div class="profile-area" id="profileArea">
                 <span class="profile-name">{{ user_name }}</span>
-                <img src="{{ session.get('profile_image') or url_for('static', filename='assets/profile.png') }}" class="profile-icon"/>
+                <img
+                    src="{{ nav_profile_image or url_for('static', filename='assets/profile.png') }}"
+                    class="profile-icon"
+                />
 
                 <div class="profile-menu" id="profileMenu">
                     <a href="{{ url_for('profile') }}">View Profile</a>
@@ -61,18 +77,23 @@
             </button>
         </form>
     </div>
+<!-- ========================= -->
+<!-- Main content -->
+<!-- ========================= -->
+    
     <main class="main-content">
         <section class="profile-header">
             <div class="profile-main-info">
                 <img
-                    src="{{ session.get('profile_image') or url_for('static', filename='assets/profile.png') }}"
+                    src="{{ profile_user.profile_image or url_for('static', filename='assets/profile.png') }}"
                     class="profile-icon"
                 />
-
                 <div>
                     <div class="profile-title-row">
-                        <h2 class="profile-name">{{ profile_user.first_name }} {{ profile_user.last_name }}</h2>
-                        <span class="badge badge-red">Student</span>
+                        <h2 class="profile-name">{{ user_name }}</h2>
+                        {% if user_type %}
+                            <span class="badge badge-red">{{ user_type|capitalize }}</span>
+                        {% endif %}
                     </div>
                     <p class="profile-subtitle">Computer Science @ BCU</p>
                     <button class="secondary-btn" id="editProfileBtn">Edit Profile</button>
@@ -94,6 +115,13 @@
 
                         <label class="post-label" for="epEmail">Email</label>
                         <input class="post-input" id="epEmail" type="email" placeholder="Email" />
+
+                        <label class="post-label">Are you a Student or Tutor?</label>
+                        <select id="signupUserType" class="post-input" required>
+                            <option value="" selected disabled>Select an option</option>
+                            <option value="student">Student</option>
+                            <option value="tutor">Tutor</option>
+                        </select>
 
                         <label class="post-label">Profile picture</label>
                         <input class="post-input" type="file" id="profileImageInput" accept="image/*">
@@ -117,63 +145,73 @@
                 </div>
             </div>
 
-            <div class="section-row">
-                <div class="section-heading">
-                    <h3>Friends</h3>
-                    <button class="link-btn">View all</button>
-                </div>
-                <div class="friends-strip">
-                    <div class="avatar-circle">U</div>
-                    <div class="avatar-circle">U</div>
-                    <div class="avatar-circle">U</div>
-                    <div class="avatar-circle">U</div>
-                    <div class="avatar-circle">U</div>
-                </div>
-            </div>
+             <div class="section-row">
+    <div class="section-heading">
+        <h3>Friends</h3>
+        <button class="link-btn">View all</button>
+    </div>
 
+    <div class="friends-strip" id="friendsStrip">
+        <!-- Friends will load here -->
+    </div>
+</div>
+
+
+            
             <div class="section-row">
                 <div class="section-heading">
                     <h3>Posts</h3>
                 </div>
 
-                {% if posts|length == 0 %}
-                    <p style="opacity:0.7;">You haven't posted anything yet.</p>
-                {% endif %}
-
-                {% for post in posts %}
-                <article class="post-card">
-                    <header class="post-header">
-                        <div class="post-author">
-                            {% if profile_user.profile_image %}
-                                <img src="{{ profile_user.profile_image }}" class="post-avatar-img">
-                            {% else %}
-                                <div class="avatar-circle red">
-                                    {{ profile_user.first_name[0] }}{{ profile_user.last_name[0] }}
-                                </div>
-                            {% endif %}
-                            <div>
-                                <span class="author-name">
-                                    {{ profile_user.first_name }} {{ profile_user.last_name }}
-                                </span>
-                                <span class="post-meta">{{ post[3] }}</span>
-                            </div>
-                        </div>
-                    </header>
-
-                    <div class="post-body">
-                        <h3>{{ post[1] }}</h3>
-                        <p class="post-text">{{ post[2] }}</p>
-                    </div>
-                </article>
-                {% endfor %}
+                <div id="feed"></div>
+                <div id="loading" style="text-align:center; padding:20px; opacity:.7;">
+                Loading posts...
+                </div>
             </div>
         </section>
+        <!-- =========================
+             CREATE POST MODAL
+             ========================= -->
+        <div class="modal-overlay" id="createPostModal" style="display:none;">
+            <div class="modal-box create-post-box">
+                <button class="close-modal" onclick="hideCreatePost()">✕</button>
+                <h2>Create Post</h2>
+
+                <label class="post-label" for="postTitle">Title</label>
+                <input
+                    id="postTitle"
+                    class="post-input"
+                    type="text"
+                    placeholder="Post title..."
+                    maxlength="120"
+                />
+
+                <label class="post-label" for="postBody">Body</label>
+                <textarea
+                    id="postBody"
+                    class="post-textarea"
+                    placeholder="Share your thoughts here..."
+                    maxlength="2000"
+                ></textarea>
+
+                <label class="post-label" for="postImage">Image (optional)</label>
+                <input id="postImage" class="post-input" type="file" accept="image/png,image/jpeg,image/webp" />
+
+                <button class="post-submit-btn" onclick="submitPost()">Post</button>
+            </div>
+        </div>
     </main>
 </div>
+<!-- ========================= -->
+<!-- Scripts -->
+<!-- ========================= -->
+<script>
+  window.PROFILE_USER_ID = JSON.parse('{{ profile_user.id | tojson }}');
+</script>
 
 <script src="{{ url_for('static', filename='js/api.js') }}"></script>
 <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
-<script src="{{ url_for('static', filename='js/explore.js') }}"></script>
+<script src="{{ url_for('static', filename='js/posts.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </body>

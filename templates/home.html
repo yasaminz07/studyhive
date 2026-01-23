@@ -1,5 +1,12 @@
+<!-- ===== FILE: home.html ===== -->
+<!-- Section headings added for readability. -->
+<!-- Comments integration - Nafis -->
+
 <!DOCTYPE html>
 <html lang="en">
+<!-- ========================= -->
+<!-- Document head -->
+<!-- ========================= -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +18,13 @@
     <link rel="stylesheet" href="static/css/home.css"/>
     <link rel="stylesheet" href="static/css/responsive.css"/>
 </head>
+<!-- ========================= -->
+<!-- Document body -->
+<!-- ========================= -->
 <body>
+<!-- ========================= -->
+<!-- Header / navigation -->
+<!-- ========================= -->
 
     <header class="main-header">
         <!-- LEFT: Logo -->
@@ -23,7 +36,7 @@
         <nav class="main-nav">
             <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
             <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
-            <a href="{{ url_for('explore') }}" class="nav-pill-plus">+</a>
+            <a href="#" class="nav-pill-plus" onclick="showCreatePost()">+</a>
             <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
             <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
         </nav>
@@ -33,10 +46,9 @@
             <div class="profile-area" id="profileArea">
                 <span class="profile-name">{{ user_name }}</span>
                 <img
-                    src="{{ session.get('profile_image') or url_for('static', filename='assets/profile.png') }}"
+                    src="{{ nav_profile_image or url_for('static', filename='assets/profile.png') }}"
                     class="profile-icon"
                 />
-                    
 
                 <div class="profile-menu" id="profileMenu">
                     <a href="{{ url_for('profile') }}">View Profile</a>
@@ -45,6 +57,7 @@
                     <a href="#" onclick="showSignOut()">Sign Out</a>
                 </div>
             </div>
+
             <!-- SIGN OUT MODAL SHOULD BE OUTSIDE -->
             <div class="modal-overlay" id="signOutModal">
                 <div class="modal-box">
@@ -56,15 +69,22 @@
             </div>
         </div>
     </header>
+
     <!-- SEARCH -->
     <div class="search-section">
-        <form class="search-bar" action="/explore" method="GET">
+        <form class="search-bar" id="homeSearchForm">
             <input type="text" name="q" id="searchInput" placeholder="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
             <button class="search-icon" type="submit">
-                <img src="{{ url_for('static', filename='assets/icons/bookmark.png') }}" class="search-img">
+                <img src="{{ url_for('static', filename='img/search.png') }}" class="search-img">
             </button>
         </form>
+
+        <div id="homeSearchResults" class="search-results"></div>
     </div>
+<!-- ========================= -->
+<!-- Main content -->
+<!-- ========================= -->
+
     <main class="main-content">
         <h2 class="section-title">TOP POSTS</h2>
         <div class="top-posts-strip">
@@ -75,21 +95,44 @@
             <div class="top-post-card"></div>
         </div>
 
-        <!--<div class="posts-header">
-            <h2 class="section-title">POSTS</h2>
-            <select class="sort-select">
-                <option>Best</option>
-                <option>Newest</option>
-                <option>Oldest</option>
-            </select>
-        </div>-->
-
         <div id="feed"></div>
 
         <div id="loading" style="text-align:center; padding:20px; opacity:0.7;">
             Loading more posts...
         </div>
-        
+
+        <!-- =========================
+             CREATE POST MODAL
+             ========================= -->
+        <div class="modal-overlay" id="createPostModal" style="display:none;">
+            <div class="modal-box create-post-box">
+                <button class="close-modal" onclick="hideCreatePost()">✕</button>
+                <h2>Create Post</h2>
+
+                <label class="post-label" for="postTitle">Title</label>
+                <input
+                    id="postTitle"
+                    class="post-input"
+                    type="text"
+                    placeholder="Post title..."
+                    maxlength="120"
+                />
+
+                <label class="post-label" for="postBody">Body</label>
+                <textarea
+                    id="postBody"
+                    class="post-textarea"
+                    placeholder="Share your thoughts here..."
+                    maxlength="2000"
+                ></textarea>
+
+                <label class="post-label" for="postImage">Image (optional)</label>
+                <input id="postImage" class="post-input" type="file" accept="image/png,image/jpeg,image/webp" />
+
+                <button class="post-submit-btn" onclick="submitPost()">Post</button>
+            </div>
+        </div>
+
         <!-- REPORT MODAL-->
         <div class="modal-overlay" id="reportModal">
             <div class="modal-box report-box">
@@ -145,14 +188,20 @@
             </div>
         </div>
 
+    </main>
+<!-- ========================= -->
+<!-- Footer -->
+<!-- ========================= -->
 
-</div>
-<footer>
-    
-</footer>
+    <footer></footer>
+<!-- ========================= -->
+<!-- Scripts -->
+<!-- ========================= -->
 
-<script src="{{ url_for('static', filename='js/posts.js') }}"></script>
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/posts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/comments.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </body>
 </html>

@@ -1,5 +1,11 @@
+<!-- ===== FILE: messages.html ===== -->
+<!-- Section headings added for readability. -->
+
 <!DOCTYPE html>
 <html lang="en">
+<!-- ========================= -->
+<!-- Document head -->
+<!-- ========================= -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +16,13 @@
         <link rel="stylesheet" href="static/css/responsive.css"/>
         <link rel="stylesheet" href="static/css/messages.css"/>
     </head>
+<!-- ========================= -->
+<!-- Document body -->
+<!-- ========================= -->
     <body class="messages-body">
+<!-- ========================= -->
+<!-- Header / navigation -->
+<!-- ========================= -->
         <header class="main-header">
             <!-- LEFT: Logo -->
             <div class="logo-area">
@@ -21,7 +33,7 @@
             <nav class="main-nav">
                 <a href="{{ url_for('home') }}" class="nav-pill active">Home</a>
                 <a href="{{ url_for('explore') }}" class="nav-pill">Explore</a>
-                <a href="{{ url_for('explore') }}" class="nav-pill-plus">+</a>
+                <a href="#" class="nav-pill-plus" onclick="showCreatePost()">+</a>
                 <a href="{{ url_for('about') }}" class="nav-pill">About Us</a>
                 <a href="{{ url_for('messages') }}" class="nav-pill">Messages</a>
             </nav>
@@ -30,7 +42,10 @@
                 <!-- PROFILE -->
                 <div class="profile-area" id="profileArea">
                     <span class="profile-name">{{ user_name }}</span>
-                    <img src="{{ url_for('static', filename='assets/profile.png') }}" class="profile-icon">
+                    <img
+                        src="{{ nav_profile_image or url_for('static', filename='assets/profile.png') }}"
+                        class="profile-icon"
+                    />
 
                     <div class="profile-menu" id="profileMenu">
                         <a href="{{ url_for('profile') }}">View Profile</a>
@@ -107,8 +122,43 @@
             </section>
 
         </div>
+        <!-- =========================
+             CREATE POST MODAL
+             ========================= -->
+        <div class="modal-overlay" id="createPostModal" style="display:none;">
+            <div class="modal-box create-post-box">
+                <button class="close-modal" onclick="hideCreatePost()">✕</button>
+                <h2>Create Post</h2>
+
+                <label class="post-label" for="postTitle">Title</label>
+                <input
+                    id="postTitle"
+                    class="post-input"
+                    type="text"
+                    placeholder="Post title..."
+                    maxlength="120"
+                />
+
+                <label class="post-label" for="postBody">Body</label>
+                <textarea
+                    id="postBody"
+                    class="post-textarea"
+                    placeholder="Share your thoughts here..."
+                    maxlength="2000"
+                ></textarea>
+
+                <label class="post-label" for="postImage">Image (optional)</label>
+                <input id="postImage" class="post-input" type="file" accept="image/png,image/jpeg,image/webp" />
+
+                <button class="post-submit-btn" onclick="submitPost()">Post</button>
+            </div>
+        </div>
+<!-- ========================= -->
+<!-- Scripts -->
+<!-- ========================= -->
 
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/posts.js') }}"></script>
 
     </body>
 </html>

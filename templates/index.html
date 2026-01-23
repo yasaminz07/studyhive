@@ -1,5 +1,11 @@
+<!-- ===== FILE: index.html ===== -->
+<!-- Section headings added for readability. -->
+
 <!DOCTYPE html>
 <html lang="en">
+<!-- ========================= -->
+<!-- Document head -->
+<!-- ========================= -->
 <head>
     <meta charset="UTF-8" />
     <title>StudyHive – Welcome</title>
@@ -11,8 +17,14 @@
     <link rel="stylesheet" href="static/css/welcome.css"/>
     <link rel="stylesheet" href="static/css/footer.css"/>
 </head>
+<!-- ========================= -->
+<!-- Document body -->
+<!-- ========================= -->
 
 <body class="welcome-page">
+<!-- ========================= -->
+<!-- Header / navigation -->
+<!-- ========================= -->
 
     <header class="main-header">
         <div class="logo-area">
@@ -23,6 +35,9 @@
             <a href="#" class="login-btn" id="openLogin">LOGIN</a>    
         </div>
     </header>
+<!-- ========================= -->
+<!-- Main content -->
+<!-- ========================= -->
 
     <main class="main-content">
         <section class="welcome-layout">
@@ -112,9 +127,14 @@
                     <input type="text" id="signupLastName" placeholder="Last Name" class="input-box">
                     <input type="text" id="signupUsername" placeholder="Username" class="input-box">
                     <input type="email" id="signupEmail" placeholder="Email Address" class="input-box">
+                    <select id="signupUserType" class="input-box" required>
+                        <option value="" selected disabled>Are you a Student or Tutor?</option>
+                        <option value="student">Student</option>
+                        <option value="tutor">Tutor</option>
+                    </select>
                     <input type="password" id="signupPassword" placeholder="Create Password" class="input-box">
                     <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" class="input-box">
-
+                    
                     <p id="signupError" class="error-text" style="display:none;"></p>
 
                     <a href="#" class="modal-link" id="switchToLogin">Already have an account? Log in</a>
@@ -122,6 +142,9 @@
                     <button class="login-btn-modal" id="signupSubmit">Create Account</button>
                 </div>
             </div>
+<!-- ========================= -->
+<!-- Footer -->
+<!-- ========================= -->
     <footer class="footer">
         <div class="footer-container">
 
@@ -157,6 +180,9 @@
 
         </div>
     </footer>
+<!-- ========================= -->
+<!-- Scripts -->
+<!-- ========================= -->
 
 
 

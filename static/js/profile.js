@@ -1,3 +1,10 @@
+// ===== FILE: profile.js =====
+
+// =========================
+// Profile editing + uploads - Nafis
+//
+// DOM & state
+// =========================
 document.getElementById("saveProfileBtn").addEventListener("click", async () => {
   const firstName = document.getElementById("epFirstName").value.trim();
   const lastName = document.getElementById("epLastName").value.trim();
@@ -14,7 +21,8 @@ document.getElementById("saveProfileBtn").addEventListener("click", async () => 
       first_name: firstName,
       last_name: lastName,
       username: username,
-      email: email
+      email: email,
+      user_type: document.getElementById("signupUserType").value
     })
   });
 
@@ -48,7 +56,7 @@ document.getElementById("saveProfileBtn").addEventListener("click", async () => 
   }
 
   alert("Profile updated successfully!");
-  document.getElementById("editProfileModal").style.display = "none";
+  location.reload();
 });
 
 document.getElementById("closeEditProfile").onclick = () => {
@@ -71,3 +79,52 @@ editBtn.addEventListener("click", async () => {
   document.getElementById("epUsername").value = data.username || "";
   document.getElementById("epEmail").value = data.email || "";
 });
+
+
+///Mutuals Ismaeel ////
+
+async function loadFriends() {
+    try {
+        const res = await fetch("/api/friends", {
+            credentials: "include"
+        });
+
+        const friends = await res.json();
+        const strip = document.getElementById("friendsStrip");
+
+        if (!strip) return;
+
+        strip.innerHTML = "";
+
+        if (friends.length === 0) {
+            strip.innerHTML = "<span style='opacity:.6'>No friends yet</span>";
+            return;
+        }
+
+        friends.forEach(friend => {
+            const div = document.createElement("div");
+            div.className = "avatar-circle";
+            div.title = friend.name;
+
+            if (friend.profile_image) {
+                div.style.backgroundImage = `url(${friend.profile_image})`;
+                div.style.backgroundSize = "cover";
+                div.style.backgroundPosition = "center";
+                div.textContent = "";
+            } else {
+                div.textContent = friend.name.charAt(0).toUpperCase();
+            }
+
+            div.addEventListener("click", () => {
+                window.location.href = `/profile/${friend.id}`;
+            });
+
+            strip.appendChild(div);
+        });
+
+    } catch (err) {
+        console.error("Error loading friends:", err);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadFriends);

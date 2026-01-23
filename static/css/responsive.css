@@ -1,116 +1,9 @@
-/* ===== RESPONSIVE ===== */
+/* ===== FILE: responsive.css ===== */
+/* Section headings added for readability. */
 
-@media (max-width: 900px) {
-    .welcome-layout {
-        grid-template-columns: 1fr;
-    }
-    .main-header {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    .subject-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .post-grid {
-    grid-template-columns: 1fr;
-    }
-}
-
-/* ===== MOBILE BOTTOM NAV (INSTAGRAM STYLE + PROFILE) ===== */
-@media (max-width: 750px) {
-
-    .page-wrap,
-    .main-content {
-        padding-bottom: 100px !important;
-    }
-    /* Make header the bottom bar */
-    .main-header {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 65px;
-        background: rgba(33, 48, 29, 0.95);
-        backdrop-filter: blur(6px);
-        border-top: 1px solid rgba(255,255,255,0.15);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-        flex-direction: row !important;   /* force horizontal bar */
-        z-index: 3000;
-    }
-
-    /* Hide logo + search */
-    .logo-area,
-    .search-wrapper {
-        display: none !important;
-    }
-
-    /* Make the main nav fill the bar */
-    .main-nav {
-        flex: 4;
-        display: flex !important;
-        justify-content: space-around;
-        align-items: center;
-        height: 100%;
-    }
-
-    /* Nav pill buttons */
-    .nav-pill {
-        flex: 1;
-        text-align: center;
-        padding: 12px 0;
-        background: transparent !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        font-size: 14px;
-    }
-    .main-header a.nav-pill {
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    .nav-pill.active {
-        color: #ffd26b !important;
-    }
-
-    /* ===== ADD PROFILE TO BOTTOM NAV ===== */
-
-    /* Show profile in bar */
-    .header-right {
-        flex: 1;
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .profile-area {
-        display: flex !important;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .profile-name {
-        display: none; /* hide text, too long for bottom nav */
-    }
-
-    .profile-icon {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-    }
-
-    /* Hide dropdown menu on mobile */
-    .profile-menu {
-        display: none !important;
-    }
-
-    .main-content {
-        padding-bottom: 85px !important;
-    }
-}
+/* ========================= */
+/* Base / layout / components */
+/* ========================= */
 
 /* welcome page responsiveness */
 /* responsive */
@@ -141,98 +34,302 @@
     }
 }
 
-/* ===== MOBILE BOTTOM NAV (INSTAGRAM STYLE + PROFILE) ===== */
+/* =========================================================
+   post pics
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .post-card {
+    padding: 14px 14px 10px;
+    border-radius: 20px;
+  }
+
+  .post-placeholder {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .post-image-wrapper {
+    height: clamp(220px, 45vh, 520px);
+    border-radius: 14px;
+  }
+
+  .post-body .post-title {
+    font-size: 18px;
+  }
+
+  .post-footer {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .post-image-wrapper {
+    height: clamp(200px, 42vh, 420px);
+  }
+}
+
+/* About Us page */
+/* =========================
+   ABOUT PAGE – MOBILE
+   ========================= */
+
+@media (max-width: 900px) {
+
+    /* General spacing */
+    .about-hero,
+    .about-wide,
+    .parallax-section,
+    .about-card {
+        padding: 24px !important;
+        border-radius: 20px !important;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+
+    .about-subtitle {
+        font-size: 0.95rem;
+    }
+
+    /* Stats: 2 per row */
+    .about-stats {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .stat-box {
+        min-width: auto !important;
+        padding: 16px !important;
+    }
+
+    .stat-number {
+        font-size: 1.6rem !important;
+    }
+
+    /* Parallax content */
+    .parallax-content {
+        padding: 20px !important;
+    }
+
+    /* Timeline */
+    .timeline-item {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    /* Team grid */
+    .team-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .team-card {
+        padding: 14px;
+    }
+
+    .team-card h3 {
+        font-size: 0.95rem;
+    }
+
+    .team-card p {
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+
+    /* Testimonials */
+    .testimonial {
+        font-size: 0.9rem;
+    }
+
+    /* Accordion */
+    .accordion-header {
+        font-size: 1rem;
+    }
+
+    .accordion-body p,
+    .about-card p {
+        font-size: 0.92rem;
+        line-height: 1.5;
+    }
+
+    /* Values list */
+    .about-list li {
+        font-size: 0.9rem;
+    }
+
+}
+
+/* =========================
+   EXTRA SMALL PHONES
+   ========================= */
+@media (max-width: 480px) {
+
+    .page-title {
+        font-size: 1.6rem;
+    }
+
+    .about-hero {
+        padding: 20px !important;
+    }
+
+    .about-subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* Stats: 1 per row */
+    .about-stats {
+        grid-template-columns: 1fr;
+    }
+
+    /* Team grid: 1 per row */
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Make cards more compact */
+    .about-card,
+    .parallax-section,
+    .about-wide {
+        padding: 18px !important;
+    }
+
+}
+
+/* =========================
+   MOBILE: BOTTOM NAV FINAL FIX
+   ========================= */
+/* =========================
+   MODERN MOBILE BOTTOM NAV
+   ========================= */
+/* =========================
+   MODERN MOBILE BOTTOM NAV
+   ========================= */
 @media (max-width: 750px) {
+
+    body {
+        padding-bottom: 72px;
+        overflow-x: hidden;
+    }
 
     .page-wrap,
     .main-content {
-        padding-bottom: 100px !important;
+        padding-bottom: 80px !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
     }
-    /* Make header the bottom bar */
-    .main-header {
+
+    /* Bottom bar */
+    header.main-header {
         position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 65px;
-        background: rgba(33, 48, 29, 0.95);
-        backdrop-filter: blur(6px);
-        border-top: 1px solid rgba(255,255,255,0.15);
+        bottom: 12px;
+
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+
+        width: calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+
+        height: 60px;
+
+        background: rgba(25, 35, 20, 0.85);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 22px;
+
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0;
-        flex-direction: row !important;   /* force horizontal bar */
-        z-index: 3000;
+
+        padding: 0 10px;
+        z-index: 9999;
+
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
     }
 
-    /* Hide logo + search */
+    /* Hide logo + top search */
     .logo-area,
-    .search-wrapper {
+    .search-section {
         display: none !important;
     }
 
-    /* Make the main nav fill the bar */
+    /* Nav container */
     .main-nav {
-        flex: 4;
-        display: flex !important;
-        justify-content: space-around;
-        align-items: center;
+        width: 100% !important;
+        max-width: 100% !important;
         height: 100%;
+
+        margin: 0 !important;
+        padding: 0 6px !important;
+
+        display: flex !important;
+        justify-content: space-evenly !important;
+        align-items: center !important;
+
+        box-sizing: border-box;
     }
 
-    /* Nav pill buttons */
+    /* Nav buttons */
     .nav-pill {
-        flex: 1;
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+
         text-align: center;
-        padding: 12px 0;
-        background: transparent !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        font-size: 14px;
-    }
-    .main-header a.nav-pill {
-        font-size: 16px;
+        padding: 8px 6px;
+
+        font-size: 13px;
         font-weight: 600;
+
+        border-radius: 14px;
+        background: transparent !important;
+        box-shadow: none !important;
+
+        opacity: 0.7;
+        transition: all 0.2s ease;
     }
 
     .nav-pill.active {
+        opacity: 1;
         color: #ffd26b !important;
+        background: rgba(255,210,107,0.12) !important;
     }
 
-    /* ===== ADD PROFILE TO BOTTOM NAV ===== */
-
-    /* Show profile in bar */
-    .header-right {
-        flex: 1;
+    /* Profile in bar */
+    .header-actions {
         display: flex !important;
-        justify-content: center;
-        align-items: center;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .profile-area {
         display: flex !important;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
     .profile-name {
-        display: none; /* hide text, too long for bottom nav */
+        display: none !important;
     }
 
     .profile-icon {
-        width: 28px;
-        height: 28px;
+        width: 30px !important;
+        height: 30px !important;
         border-radius: 50%;
+        border: 2px solid rgba(255,255,255,0.4);
     }
 
-    /* Hide dropdown menu on mobile */
+    /* Hide dropdown on mobile */
     .profile-menu {
         display: none !important;
     }
 
-    .main-content {
-        padding-bottom: 85px !important;
+    /* Hide create post + button on mobile */
+    .nav-pill-plus {
+        display: none !important;
     }
 }

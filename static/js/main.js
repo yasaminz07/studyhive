@@ -1,3 +1,8 @@
+// ===== FILE: main.js =====
+
+// =========================
+// DOM & state
+// =========================
 /* =========================================================
    StudyHive JavaScript – Central UI Interaction Controller
 ========================================================= */
@@ -288,11 +293,17 @@ if (signupSubmit) {
         const lastName = document.getElementById("signupLastName").value.trim();
         const username = document.getElementById("signupUsername").value.trim();
         const email = document.getElementById("signupEmail").value.trim();
+        const userType = document.getElementById("signupUserType").value;  
         const password = document.getElementById("signupPassword").value;
         const confirmPassword = document.getElementById("signupConfirmPassword").value;
 
         if (!firstName || !lastName || !username || !email || !password || !confirmPassword) {
             alert("Please fill in all fields");
+            return;
+        }
+
+        if (!userType) {
+            alert("Please choose Student or Tutor");
             return;
         }
 
@@ -309,7 +320,8 @@ if (signupSubmit) {
                 lastName,
                 username,
                 email,
-                password
+                password,
+                userType
             })
         });
 
@@ -479,4 +491,130 @@ function showToast(message) {
     }, 3000);
 }
 
+// =========================
+// HOME SEARCH (home.html) - Juzer
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+  const homeForm = document.getElementById("homeSearchForm");
+  const homeInput = document.getElementById("searchInput");
+  const homeResults = document.getElementById("homeSearchResults");
 
+  // Only run this on home.html (prevents errors on other pages)
+  if (!homeForm || !homeInput || !homeResults) return;
+
+  const esc = (s) =>
+    (s || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+
+  function renderHomeResults(data) {
+    const subjects = data.subjects || [];
+    const users = data.users || [];
+    const posts = data.posts || [];
+
+    homeResults.innerHTML = `
+      <div class="sr-section">
+        <h3>Subjects</h3>
+        ${
+          subjects.length
+            ? subjects.map(s => `<a class="sr-item" href="${esc(s.url)}">${esc(s.name)}</a>`).join("")
+            : `<p class="sr-empty">No subjects found</p>`
+        }
+      </div>
+
+      <div class="sr-section">
+        <h3>People</h3>
+        ${
+          users.length
+            ? users.map(u => `
+                <div class="sr-item sr-row">
+                  <a class="sr-title" href="/profile/${u.id}">@${esc(u.username)}</a>
+                  <span class="sr-sub">${esc(((u.first_name||"") + " " + (u.last_name||"")).trim())}</span>
+                </div>
+              `).join("")
+            : `<p class="sr-empty">No people found</p>`
+        }
+      </div>
+
+      <div class="sr-section">
+        <h3>Posts</h3>
+        ${
+          posts.length
+            ? posts.map(p => `
+                <div class="sr-item">
+                  <div class="sr-title">${esc(p.title || "Untitled post")}</div>
+                  <div class="sr-sub">${esc((p.body || "").slice(0, 120))}${(p.body || "").length > 120 ? "..." : ""}</div>
+                  <div class="sr-meta">by ${esc(p.author || "Unknown")}</div>
+                </div>
+              `).join("")
+            : `<p class="sr-empty">No posts found</p>`
+        }
+      </div>
+    `;
+  }
+
+// =========================
+// API calls - Juzer
+// =========================
+
+  async function doHomeSearch() {
+    const q = (homeInput.value || "").trim();
+
+    if (!q) {
+      homeResults.innerHTML = "";
+      return;
+    }
+
+    try {
+      // uses searchAll() from api.js
+      const data = await searchAll(q);
+      renderHomeResults(data);
+    } catch (e) {
+      console.error(e);
+      homeResults.innerHTML = `<p class="sr-empty">Search failed</p>`;
+    }
+  }
+
+  // submit (Enter or button)
+  homeForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    doHomeSearch();
+  });
+
+  // live search
+  let t = null;
+  homeInput.addEventListener("input", () => {
+    clearTimeout(t);
+    t = setTimeout(doHomeSearch, 300);
+  });
+});
+
+// Index.html signup dropdown
+const select = document.getElementById("signupUserType");
+
+function updateSelectColor() {
+    if (select.value === "") {
+        select.style.color = "#888";  // placeholder color
+    } else {
+        select.style.color = "#fff";  // normal color
+    }
+}
+
+updateSelectColor();
+select.addEventListener("change", updateSelectColor);
+
+homeInput.addEventListener("input", () => {
+    clearTimeout(t);
+    t = setTimeout(doHomeSearch, 300);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (
+      !e.target.closest("#homeSearchForm") &&
+      !e.target.closest("#homeSearchResults")
+    ) {
+      homeResults.style.display = "none";
+    }
+  });

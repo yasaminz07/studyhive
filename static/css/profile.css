@@ -1,3 +1,10 @@
+/* ===== FILE: profile.css ===== */
+/* Section headings added for readability. */
+
+/* ========================= */
+/* Base / layout / components */
+/* ========================= */
+
 /* ===== PROFILE PAGES ===== */
 
 .profile-header {
@@ -85,7 +92,7 @@
 
 /* Reset ugly button styles */
 .stat-card {
-    all: unset;                 /* 🔥 removes default button styles */
+    all: unset; 
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -181,6 +188,43 @@
 
 /* Optional glow / depth */
 .profile-header .avatar-large,
-.profile-header img.profile-avatar {
+.profile-header img.profile-icon {
     box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+}
+
+/* Raashid's Tags Code */
+
+/* Yaz - adding Raashid's work */
+
+select#signupUserType {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    cursor: pointer;
+    padding-right: 44px;
+
+    /* Keep same glass background as inputs */
+    background-color: rgba(0, 0, 0, 0.45);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='white'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 18px;
+    line-height: normal;
+}
+
+/* Dropdown list colors (best browser allows) */
+select#signupUserType option {
+    background-color: #0f0f0f;
+    color: white;
+}
+select#signupUserType {
+    color-scheme: dark;
+}
+
+.modal-label {
+    display: block;
+    margin: 10px 0 6px;
+    font-size: 14px;
+    opacity: 0.8;
 }
