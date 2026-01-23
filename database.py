@@ -1,20 +1,15 @@
-# ===== FILE: database.py =====
-# Section headings added for readability.
-
-# =========================
-# Imports
-# =========================
 import os
 import psycopg2
 import sqlite3
 
 def get_db_connection():
-    use_neon = os.getenv("USE_NEON")
+    url = os.getenv("DATABASE_URL")
 
-    if use_neon == "true":
-        url = os.getenv("DATABASE_URL")
+    if url:
+        # Production / Neon (PostgreSQL)
         return psycopg2.connect(url, sslmode="require")
     else:
+        # Local dev fallback (SQLite)
         db_path = os.getenv("LOCAL_DB_PATH", "local.db")
         return sqlite3.connect(db_path)
 
